@@ -1,0 +1,9 @@
+.navigator__link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navigator__link:visited {
+  text-decoration: none;
+  color: inherit;
+}

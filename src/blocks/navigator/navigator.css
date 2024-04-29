@@ -1,0 +1,8 @@
+.navigator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Roboto";
+  font-weight: 500;
+}
