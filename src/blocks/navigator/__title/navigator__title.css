@@ -1,4 +1,6 @@
 .navigator__title {
+  margin: 0;
+  padding: 0;
   font-family: "Roboto Slab";
   font-weight: 700;
 }
