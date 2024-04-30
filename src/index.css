@@ -3,9 +3,10 @@
 @import url("./blocks/page/page.css");
 @import url("./blocks/header/header.css");
 @import url("./blocks/navigator/navigator.css");
+@import url("./blocks/navigator/__container/navigator__container.css");
 @import url("./blocks/navigator/__title/navigator__title.css");
 @import url("./blocks/navigator/__options/navigator__options.css");
+@import url("./blocks/navigator/__links/navigator__links.css");
 @import url("./blocks/navigator/__link/navigator__link.css");
-@import url("./blocks/navigator/__button/navigator__button.css");
 @import url("./blocks/navigator/__divider/navigator__divider.css");
 @import url("./blocks/button/button.css");

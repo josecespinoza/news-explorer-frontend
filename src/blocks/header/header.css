@@ -1,5 +1,8 @@
 .header {
   background-image: url("../../images/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #fff;
   height: 576px;
+  width: 100%;
 }

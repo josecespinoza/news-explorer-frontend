@@ -1,0 +1,11 @@
+.navigator__container {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  align-items: center;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "title options"
+    "divider divider";
+}
