@@ -1,0 +1,10 @@
+.header__titles {
+  padding: 0;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  row-gap: 32px;
+  flex-direction: column;
+  align-items: center;
+  width: calc((680 / 1440) * 100%);
+}

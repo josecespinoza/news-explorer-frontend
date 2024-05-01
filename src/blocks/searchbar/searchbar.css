@@ -1,0 +1,13 @@
+.searchbar {
+  margin: 0;
+  padding: 0;
+  width: 608px;
+  height: 64px;
+  background-color: #fff;
+  border: 0;
+  border-radius: 64px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  column-gap: 40px;
+}

@@ -4,7 +4,7 @@ function Navigation() {
   return (
     <nav className="navigator">
       <section className="navigator__container">
-        <h1 className="navigator__title">NewsExplorer</h1>
+        <h2 className="navigator__title">NewsExplorer</h2>
         <section className="navigator__options">
           <section className="navigator__links">
             <Link className="navigator__link" to="/inicio">
