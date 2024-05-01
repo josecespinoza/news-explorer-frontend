@@ -17,3 +17,11 @@
 @import url("./blocks/header/__searchbar/header__searchbar.css");
 @import url("./blocks/searchbar/__term/searchbar__term.css");
 @import url("./blocks/searchbar/__button/searchbar__button.css");
+@import url("./blocks/footer/footer.css");
+@import url("./blocks/footer/__copyright/footer__copyright.css");
+@import url("./blocks/footer/__options/footer__options.css");
+@import url("./blocks/footer/__links/footer__links.css");
+@import url("./blocks/footer/__link/footer__link.css");
+@import url("./blocks/footer/__link-icons/footer__link-icons.css");
+@import url("./blocks/footer/__link-icon/footer__link-icon.css");
+@import url("./blocks/footer/__icon/footer__icon.css");

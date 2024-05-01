@@ -8,33 +8,38 @@ function Footer() {
       <h4 className="footer__copyright">
         &copy; 2024 Supersite, Powered by News API
       </h4>
-      <section className="footer__links">
-        <Link className="footer__link" to="inicio">
-          Inicio
-        </Link>
-        <Link className="footer__link" to="inicio">
-          Practicum
-        </Link>
-        <a
-          className="footer__link"
-          href="https://github.com/josecespinoza/news-explorer-frontend"
-        >
-          <img
-            alt="github"
+      <section className="footer__options">
+        <section className="footer__links">
+          <Link className="footer__link" to="inicio">
+            Inicio
+          </Link>
+          <a
+            className="footer__link"
+            rel="noreferrer"
+            target="_blank"
+            href="https://tripleten.com/"
+          >
+            Practicum
+          </a>
+        </section>
+        <section className="footer__link-icons">
+          <a
             className="footer__link-icon"
-            src={githubLogo}
-          ></img>
-        </a>
-        <a
-          className="footer__link"
-          href="https://www.facebook.com/jose.carlos.espinoza"
-        >
-          <img
-            alt="github"
+            rel="noreferrer"
+            target="_blank"
+            href="https://github.com/josecespinoza/news-explorer-frontend"
+          >
+            <img className="footer__icon" alt="github" src={githubLogo}></img>
+          </a>
+          <a
             className="footer__link-icon"
-            src={facebookLogo}
-          ></img>
-        </a>
+            rel="noreferrer"
+            target="_blank"
+            href="https://www.facebook.com/jose.carlos.espinoza"
+          >
+            <img className="footer__icon" alt="github" src={facebookLogo}></img>
+          </a>
+        </section>
       </section>
     </footer>
   );
