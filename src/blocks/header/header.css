@@ -14,3 +14,9 @@
     "main"
     "searchbar";
 }
+
+@media screen and (max-width: 767px) {
+  .header {
+    height: 400px;
+  }
+}

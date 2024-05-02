@@ -5,6 +5,8 @@
   align-items: center;
   text-decoration: none;
   color: inherit;
+  width: 68px;
+  justify-content: center;
 }
 
 .navigator__link:visited {
@@ -13,6 +15,12 @@
 }
 
 .navigator__link:hover {
-  border-bottom: 1px solid;
+  border-bottom: 3px solid;
   color: inherit;
+}
+
+@media screen and (max-width: 767px) {
+  .navigator__link {
+    width: 60px;
+  }
 }

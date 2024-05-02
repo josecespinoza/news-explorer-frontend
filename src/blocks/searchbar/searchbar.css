@@ -6,8 +6,16 @@
   background-color: #fff;
   border: 0;
   border-radius: 64px;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  column-gap: 40px;
+  display: grid;
+  grid-template-columns: 24px auto 40px 168px;
+  grid-template-rows: auto;
+  grid-template-areas: ". term . button";
+}
+
+@media screen and (max-width: 767px) {
+  .searchbar {
+    grid-template-columns: 24px auto 40px 160px;
+    width: 452px;
+    height: 56px;
+  }
 }

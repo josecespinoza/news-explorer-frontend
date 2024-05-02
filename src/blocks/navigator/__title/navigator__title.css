@@ -3,4 +3,5 @@
   padding: 0;
   font-family: "Roboto Slab";
   font-weight: 700;
+  grid-area: title;
 }

@@ -2,20 +2,22 @@ import { Link } from "react-router-dom";
 
 function Navigation() {
   return (
-    <nav className="navigator">
-      <section className="navigator__container">
-        <h2 className="navigator__title">NewsExplorer</h2>
-        <section className="navigator__options">
-          <section className="navigator__links">
-            <Link className="navigator__link" to="/inicio">
-              Inicio
-            </Link>
+    <>
+      <nav className="navigator">
+        <section className="navigator__container">
+          <h2 className="navigator__title">NewsExplorer</h2>
+          <section className="navigator__options">
+            <section className="navigator__links">
+              <Link className="navigator__link" to="/inicio">
+                Inicio
+              </Link>
+            </section>
+            <button className="button">Iniciar sesión</button>
           </section>
-          <button className="button">Iniciar sesión</button>
         </section>
-      </section>
-      <div className="navigator__divider"></div>
-    </nav>
+        <div className="navigator__divider"></div>
+      </nav>
+    </>
   );
 }
 
