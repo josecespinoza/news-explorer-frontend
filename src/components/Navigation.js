@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import menu from "../images/menu.svg";
 
 function Navigation() {
   return (
@@ -6,7 +7,8 @@ function Navigation() {
       <nav className="navigator">
         <section className="navigator__container">
           <h2 className="navigator__title">NewsExplorer</h2>
-          <section className="navigator__options">
+          <button className="button navigator__menu-button"></button>
+          <section className="navigator__menu">
             <section className="navigator__links">
               <Link className="navigator__link" to="/inicio">
                 Inicio

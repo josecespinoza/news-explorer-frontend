@@ -19,3 +19,17 @@
     height: 56px;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .searchbar {
+    width: 80%;
+    border-radius: 0;
+    background-color: transparent;
+    row-gap: 16px;
+    grid-template-columns: auto;
+    grid-template-rows: 56px 56px;
+    grid-template-areas:
+      "term"
+      "button";
+  }
+}

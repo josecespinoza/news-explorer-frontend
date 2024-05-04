@@ -21,3 +21,9 @@
     line-height: 40px;
   }
 }
+
+@media screen and (max-width: 346px) {
+  .header__title {
+    font-size: 32px;
+  }
+}

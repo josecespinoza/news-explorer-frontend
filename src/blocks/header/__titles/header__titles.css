@@ -16,3 +16,8 @@
     row-gap: 16px;
   }
 }
+@media screen and (max-width: 500px) {
+  .header__titles {
+    width: 90%;
+  }
+}

@@ -22,3 +22,13 @@
 .searchbar__term:focus {
   outline: none;
 }
+
+@media screen and (max-width: 500px) {
+  .searchbar__term {
+    background-color: #fff;
+    border-radius: 50px;
+    padding: 16px;
+    width: calc(100% - 32px);
+    height: calc(100% - 32px);
+  }
+}
