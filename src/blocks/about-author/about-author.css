@@ -1,0 +1,13 @@
+.about-author {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 48px min-content auto 48px;
+  grid-template-rows: 80px auto 80px;
+  grid-template-areas:
+    ". . . ."
+    ". photo info ."
+    ". . . .";
+  column-gap: 56px;
+  width: 100%;
+}
