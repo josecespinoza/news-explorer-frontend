@@ -1,0 +1,16 @@
+.navigator__menu-button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 24px;
+  height: 24px;
+  background-image: url("../../../images/menu.svg");
+  display: none;
+}
+
+@media screen and (max-width: 679px) {
+  .navigator__menu-button {
+    display: inline;
+    grid-area: menu;
+  }
+}

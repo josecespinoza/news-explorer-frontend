@@ -1,0 +1,16 @@
+.footer__options {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  column-gap: 40px;
+  grid-area: options;
+}
+
+@media screen and (max-width: 690px) {
+  .footer__options {
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 100%;
+  }
+}

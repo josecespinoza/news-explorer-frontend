@@ -1,0 +1,28 @@
+.header {
+  background-image: url("../../images/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  height: 576px;
+  width: 100%;
+  display: grid;
+  align-items: baseline;
+  grid-template-columns: auto;
+  grid-template-rows: min-content min-content auto;
+  grid-template-areas:
+    "navigator"
+    "main"
+    "searchbar";
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    height: 100vh;
+  }
+}

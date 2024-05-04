@@ -1,0 +1,8 @@
+.navigator__divider {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border-bottom: 1px solid #c4c4c4;
+  opacity: 0.8;
+  grid-area: divider;
+}
