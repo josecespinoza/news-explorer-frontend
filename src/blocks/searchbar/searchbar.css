@@ -1,0 +1,35 @@
+.searchbar {
+  margin: 0;
+  padding: 0;
+  width: 608px;
+  height: 64px;
+  background-color: #fff;
+  border: 0;
+  border-radius: 64px;
+  display: grid;
+  grid-template-columns: 24px auto 40px 168px;
+  grid-template-rows: auto;
+  grid-template-areas: ". term . button";
+}
+
+@media screen and (max-width: 767px) {
+  .searchbar {
+    grid-template-columns: 24px auto 40px 160px;
+    width: 452px;
+    height: 56px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .searchbar {
+    width: 80%;
+    border-radius: 0;
+    background-color: transparent;
+    row-gap: 16px;
+    grid-template-columns: auto;
+    grid-template-rows: 56px 56px;
+    grid-template-areas:
+      "term"
+      "button";
+  }
+}

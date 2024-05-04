@@ -1,0 +1,21 @@
+.footer {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  min-height: 80px;
+  grid-template-columns: 40px auto 40px;
+  grid-template-rows: auto;
+  grid-template-areas: ". container .";
+}
+
+@media screen and (max-width: 767px) {
+  .footer {
+    min-height: 64px;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .footer {
+    grid-template-columns: 16px auto 16px;
+  }
+}
