@@ -1,0 +1,7 @@
+.about-author__photo-mask {
+  grid-area: photo;
+  overflow: hidden;
+  border-radius: 100%;
+  width: 464px;
+  height: 464px;
+}
