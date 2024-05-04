@@ -1,0 +1,19 @@
+.about-author__photo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-area: photo;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .about-author__photo-container {
+    width: 232px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .about-author__photo-container {
+    width: 272px;
+  }
+}

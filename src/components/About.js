@@ -2,10 +2,12 @@ import author from "../images/author.jpg";
 
 function About() {
   return (
-    <section className="about-author">
-      <div className="about-author__photo-mask">
-        <img className="about-author__photo" alt="author" src={author}></img>
-      </div>
+    <section className="about-author page__about-author">
+      <section className="about-author__photo-container">
+        <div className="about-author__photo-mask">
+          <img className="about-author__photo" alt="author" src={author}></img>
+        </div>
+      </section>
       <section className="about-author__info">
         <h2 className="about-author__title">Acerca del autor</h2>
         <section className="about-author__description">
