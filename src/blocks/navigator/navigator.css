@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .navigator {
     height: 66px;
   }
