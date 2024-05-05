@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import menu from "../images/menu.svg";
 
 function Navigation() {
   return (

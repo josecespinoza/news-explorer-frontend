@@ -4,9 +4,15 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: baseline;
+  align-items: center;
   margin: auto;
   min-height: 100vh;
   width: 100vw;
   max-width: 1440px;
+}
+
+@media screen and (max-width: 550px) {
+  .page {
+    align-items: center;
+  }
 }

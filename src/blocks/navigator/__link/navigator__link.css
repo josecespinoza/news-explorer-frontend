@@ -19,7 +19,7 @@
   color: inherit;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .navigator__link {
     width: 60px;
   }
