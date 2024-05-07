@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./SourceSans3-Regular.ttf.woff") format("woff"),
+    url("./SourceSans3-Regular.ttf.woff2") format("woff2");
+}

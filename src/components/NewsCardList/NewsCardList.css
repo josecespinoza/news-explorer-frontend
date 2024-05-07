@@ -1,0 +1,16 @@
+.news {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.news__button {
+  background-color: #e8e8e8;
+  width: 288px;
+  height: 64px;
+  font-size: 18px;
+}
