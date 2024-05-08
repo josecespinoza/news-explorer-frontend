@@ -1,11 +1,11 @@
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./Main.css";
 
-function Main({ cards }) {
+function Main({ cards, isSearching }) {
   return (
     <main className="main">
       <section className="main__container">
-        <NewsCardList cards={cards}></NewsCardList>
+        <NewsCardList cards={cards} isSearching={isSearching}></NewsCardList>
       </section>
     </main>
   );
