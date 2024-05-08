@@ -1,6 +1,18 @@
+import { useState } from "react";
 import Navigation from "./Navigation";
 
-function Header() {
+function Header({ onSearch }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  function handleSearch(evt) {
+    evt.preventDefault();
+    onSearch(searchTerm);
+  }
+
+  function handleChange(evt) {
+    setSearchTerm(evt.target.value);
+  }
+
   return (
     <header className="header">
       <Navigation></Navigation>
@@ -12,14 +24,15 @@ function Header() {
           cuenta personal.
         </h3>
       </section>
-      <div className="searchbar header__searchbar">
+      <form className="searchbar header__searchbar" onSubmit={handleSearch}>
         <input
           className="searchbar__term"
           type="text"
           placeholder="Introduce un tema"
+          onChange={handleChange}
         ></input>
         <button className="button searchbar__button">Buscar</button>
-      </div>
+      </form>
     </header>
   );
 }
