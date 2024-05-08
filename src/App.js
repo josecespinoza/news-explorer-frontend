@@ -3,15 +3,17 @@ import Header from "./components/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer";
 import About from "./components/About";
-import cards from "./data/cards.json";
 import newsApi from "./utils/api";
 import { useState } from "react";
 
 function App() {
   const [cards, setCards] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   function handleNewsSearch(searchTerm) {
+    setIsSearching(true);
     newsApi.getNews(searchTerm).then((result) => {
+      setIsSearching(false);
       setCards(result.articles);
     });
   }
@@ -19,7 +21,7 @@ function App() {
   return (
     <div className="page">
       <Header onSearch={handleNewsSearch}></Header>
-      <Main cards={cards}></Main>
+      <Main cards={cards} isSearching={isSearching}></Main>
       <About></About>
       <Footer></Footer>
     </div>
