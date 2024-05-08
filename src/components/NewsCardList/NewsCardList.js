@@ -4,10 +4,11 @@ import "./NewsCardList.css";
 function NewsCardList({ cards }) {
   console.log(cards);
   return (
-    <>
+    <section className="news">
       {cards && (
         <>
-          <ul className="news">
+          <h2 className="main__title">Resultados de la b&uacute;squeda</h2>
+          <ul className="news__list">
             {cards.map((card, id) => (
               <NewsCard key={id} card={card}></NewsCard>
             ))}
@@ -16,7 +17,7 @@ function NewsCardList({ cards }) {
         </>
       )}
       {!cards && <section className="main__notfound"></section>}
-    </>
+    </section>
   );
 }
 
