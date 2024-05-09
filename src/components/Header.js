@@ -6,7 +6,7 @@ function Header({ onSearch }) {
 
   function handleSearch(evt) {
     evt.preventDefault();
-    onSearch(searchTerm);
+    searchTerm && onSearch(searchTerm);
   }
 
   function handleChange(evt) {

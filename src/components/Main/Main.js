@@ -1,11 +1,24 @@
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./Main.css";
 
-function Main({ cards, isSearching }) {
+function Main({
+  cards,
+  isNewsListShown,
+  isSearching,
+  onClickViewMore,
+  isLastPage,
+}) {
   return (
     <main className="main">
       <section className="main__container">
-        <NewsCardList cards={cards} isSearching={isSearching}></NewsCardList>
+        {isNewsListShown && (
+          <NewsCardList
+            cards={cards}
+            isSearching={isSearching}
+            onViewMore={onClickViewMore}
+            isLastPage={isLastPage}
+          ></NewsCardList>
+        )}
       </section>
     </main>
   );
