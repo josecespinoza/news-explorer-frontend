@@ -1,15 +1,11 @@
-const REACT_APP_API_URL = "https://newsapi.org/v2/everything";
-const REACT_APP_API_KEY = "***REMOVED***";
-const REACT_APP_NEWS_PAGE_SIZE = 3;
-
 const newsApi = {};
-newsApi.getNews = async (searchTerm = "ia") => {
+newsApi.getNews = async (searchTerm, page = 1) => {
   return fetch(
-    `${REACT_APP_API_URL}?q=${searchTerm}&from=2024-04-30&to=2024-05-07&pageSize=${REACT_APP_NEWS_PAGE_SIZE}&page=1`,
+    `${process.env.REACT_APP_API_URL}?q=${searchTerm}&from=2024-04-30&to=2024-05-07&pageSize=${process.env.REACT_APP_NEWS_PAGE_SIZE}&page=${page}`,
     {
       method: "GET",
       headers: {
-        Authorization: REACT_APP_API_KEY,
+        Authorization: process.env.REACT_APP_API_KEY,
       },
     }
   ).then((response) => {

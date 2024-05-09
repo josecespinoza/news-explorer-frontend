@@ -3,7 +3,12 @@ import Preloader from "../PreLoader/Preloader";
 import "./NewsCardList.css";
 import notFoundLogo from "../../images/not-found_v1.svg";
 
-function NewsCardList({ cards, isSearching }) {
+function NewsCardList({ cards, isSearching, onViewMore, isLastPage }) {
+  function handleViewMore(evt) {
+    evt.preventDefault();
+    onViewMore();
+  }
+
   return (
     <>
       {cards.length > 0 && !isSearching && (
@@ -16,7 +21,11 @@ function NewsCardList({ cards, isSearching }) {
               <NewsCard key={id} card={card}></NewsCard>
             ))}
           </ul>
-          <button className="button news__button">Ver m&aacute;s</button>
+          {!isLastPage && (
+            <button className="button news__button" onClick={handleViewMore}>
+              Ver m&aacute;s
+            </button>
+          )}
         </section>
       )}
       {isSearching && (
