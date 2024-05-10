@@ -1,0 +1,19 @@
+.main {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  background-color: #f5f6f7;
+}
+
+.main__container {
+  margin: 0;
+  padding: 0;
+  width: calc(100% - 208px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
