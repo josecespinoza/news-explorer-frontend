@@ -5,6 +5,7 @@ function Main({
   cards,
   isNewsListShown,
   isSearching,
+  isSearchingMore,
   onClickViewMore,
   isLastPage,
 }) {
@@ -15,6 +16,7 @@ function Main({
           <NewsCardList
             cards={cards}
             isSearching={isSearching}
+            isSearchingMore={isSearchingMore}
             onViewMore={onClickViewMore}
             isLastPage={isLastPage}
           ></NewsCardList>
