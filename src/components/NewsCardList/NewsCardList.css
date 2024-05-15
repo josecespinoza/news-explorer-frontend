@@ -87,3 +87,28 @@
     row-gap: 32px;
   }
 }
+
+@media screen and (max-width: 700px) {
+  .news {
+    margin: 32px 150px;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .news {
+    margin: 32px 104px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .news {
+    margin: 32px 60px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .news {
+    margin: 32px 16px;
+  }
+}
