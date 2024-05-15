@@ -14,6 +14,7 @@
 @media screen and (max-width: 1070px) {
   .about-author {
     max-width: calc(100% - 80px);
+    padding: 0;
   }
 }
 
@@ -21,9 +22,7 @@
   .about-author {
     grid-template-columns: min-content 1fr;
     justify-content: center;
-    padding: 0;
     column-gap: 32px;
-    max-width: calc(100% - 80px);
   }
 }
 

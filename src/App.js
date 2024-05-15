@@ -9,6 +9,7 @@ import { useState } from "react";
 function App() {
   const [cards, setCards] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [isSearchingMore, setIsSearchingMore] = useState(false);
   const [isNewsListShown, setIsNewsListShown] = useState(false);
   const [currentSearchTerm, setCurrentSearchTerm] = useState("");
   const [totalPages, setTotalPages] = useState(0);
@@ -31,9 +32,10 @@ function App() {
   function handleViewMore() {
     const nextPage = currentPage + 1;
     setCurrentPage(nextPage);
+    setIsSearchingMore(true);
     newsApi.getNews(currentSearchTerm, nextPage).then((result) => {
+      setIsSearchingMore(false);
       setCards((prevCards) => [...prevCards, ...result.articles]);
-      console.log("cards", cards);
     });
   }
 
@@ -44,6 +46,7 @@ function App() {
         isNewsListShown={isNewsListShown}
         cards={cards}
         isSearching={isSearching}
+        isSearchingMore={isSearchingMore}
         onClickViewMore={handleViewMore}
         isLastPage={totalPages === currentPage}
       ></Main>
