@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer";
 import About from "./components/About";
+import ModalWithForm from "./components/ModalWithForm/ModalWithForm";
 import newsApi from "./utils/api";
 import { useState } from "react";
 
@@ -39,6 +40,25 @@ function App() {
     });
   }
 
+  const signInInputs = [
+    {
+      label: "Correo Electrónico",
+      name: "email",
+      type: "text",
+      placeholder: "Introduce tu correo electrónico",
+      required: true,
+    },
+    {
+      label: "Contraseña",
+      name: "password",
+      type: "password",
+      placeholder: "Introduce tu contraseña",
+      required: true,
+    },
+  ];
+
+  const handleSignIn = {};
+
   return (
     <div className="page">
       <Header onSearch={handleNewsSearch}></Header>
@@ -52,6 +72,14 @@ function App() {
       ></Main>
       <About></About>
       <Footer></Footer>
+      {false && (
+        <ModalWithForm
+          title="Iniciar sesión"
+          buttonLabel="Iniciar sesión"
+          inputs={signInInputs}
+          onSubmit={handleSignIn}
+        ></ModalWithForm>
+      )}
     </div>
   );
 }
