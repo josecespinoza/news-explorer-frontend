@@ -6,6 +6,7 @@ import About from "./components/About";
 import ModalWithForm from "./components/ModalWithForm/ModalWithForm";
 import newsApi from "./utils/api";
 import { useState } from "react";
+import SignInModalForm from "./components/SignInModalForm/SignInModalForm";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -15,6 +16,7 @@ function App() {
   const [currentSearchTerm, setCurrentSearchTerm] = useState("");
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const [isSigninOpen, setIsSignInOpen] = useState(false);
 
   function handleNewsSearch(searchTerm) {
     setCurrentSearchTerm(searchTerm);
@@ -40,28 +42,20 @@ function App() {
     });
   }
 
-  const signInInputs = [
-    {
-      label: "Correo Electrónico",
-      name: "email",
-      type: "text",
-      placeholder: "Introduce tu correo electrónico",
-      required: true,
-    },
-    {
-      label: "Contraseña",
-      name: "password",
-      type: "password",
-      placeholder: "Introduce tu contraseña",
-      required: true,
-    },
-  ];
+  function handleSignInClick() {
+    setIsSignInOpen(true);
+  }
 
-  const handleSignIn = {};
+  function handleSignClose() {
+    setIsSignInOpen(false);
+  }
 
   return (
     <div className="page">
-      <Header onSearch={handleNewsSearch}></Header>
+      <Header
+        onSearch={handleNewsSearch}
+        onSignInClick={handleSignInClick}
+      ></Header>
       <Main
         isNewsListShown={isNewsListShown}
         cards={cards}
@@ -72,14 +66,10 @@ function App() {
       ></Main>
       <About></About>
       <Footer></Footer>
-      {false && (
-        <ModalWithForm
-          title="Iniciar sesión"
-          buttonLabel="Iniciar sesión"
-          inputs={signInInputs}
-          onSubmit={handleSignIn}
-        ></ModalWithForm>
-      )}
+      <SignInModalForm
+        isOpen={isSigninOpen}
+        onClose={handleSignClose}
+      ></SignInModalForm>
     </div>
   );
 }

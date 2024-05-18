@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navigation from "./Navigation";
 
-function Header({ onSearch }) {
+function Header({ onSearch, onSignInClick }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   function handleSearch(evt) {
@@ -13,9 +13,13 @@ function Header({ onSearch }) {
     setSearchTerm(evt.target.value);
   }
 
+  function handleSignInClick() {
+    onSignInClick();
+  }
+
   return (
     <header className="header">
-      <Navigation></Navigation>
+      <Navigation onSignInClick={handleSignInClick}></Navigation>
       <section className="header__titles">
         <h1 className="header__title">{`¿Qué está pasando
         en el mundo?`}</h1>

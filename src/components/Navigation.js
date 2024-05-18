@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
-function Navigation() {
+function Navigation({ onSignInClick }) {
+  function handleSignInClick() {
+    onSignInClick();
+  }
+
   return (
     <>
       <nav className="navigator">
@@ -13,7 +17,9 @@ function Navigation() {
                 Inicio
               </Link>
             </section>
-            <button className="button">Iniciar sesión</button>
+            <button className="button" onClick={handleSignInClick}>
+              Iniciar sesión
+            </button>
           </section>
         </section>
         <div className="navigator__divider"></div>
