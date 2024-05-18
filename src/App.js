@@ -3,8 +3,7 @@ import Header from "./components/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer";
 import About from "./components/About";
-import ModalWithForm from "./components/ModalWithForm/ModalWithForm";
-import newsApi from "./utils/api";
+import newsApi from "./utils/newsApi";
 import { useState } from "react";
 import SignInModalForm from "./components/SignInModalForm/SignInModalForm";
 

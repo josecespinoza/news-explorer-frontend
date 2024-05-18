@@ -11,6 +11,7 @@ import "./ModalWithForm.css";
  */
 
 function ModalWithForm({
+  children,
   title,
   buttonLabel,
   inputs,
@@ -44,7 +45,7 @@ function ModalWithForm({
                   return (
                     <div key={index} className="modal-form__inputset">
                       <label htmlFor={input.name} className="modal-form__label">
-                        Correo electrónico
+                        {input.label}
                       </label>
                       <input
                         className="modal-form__input"
@@ -65,12 +66,7 @@ function ModalWithForm({
             >
               {buttonLabel}
             </button>
-            <h4 className="modal-form__text">
-              o{" "}
-              <a href="" className="modal-form__link">
-                inscribirse
-              </a>
-            </h4>
+            {children}
           </form>
         </section>
       </section>
