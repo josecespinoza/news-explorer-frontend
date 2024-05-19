@@ -16,6 +16,7 @@ function App() {
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [isSigninOpen, setIsSignInOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function handleNewsSearch(searchTerm) {
     setCurrentSearchTerm(searchTerm);
@@ -45,8 +46,18 @@ function App() {
     setIsSignInOpen(true);
   }
 
+  function handleSignOutClick() {
+    setIsLoggedIn(false);
+    localStorage.removeItem("token");
+  }
+
   function handleSignClose() {
     setIsSignInOpen(false);
+  }
+
+  function handleSignIn() {
+    setIsSignInOpen(false);
+    setIsLoggedIn(true);
   }
 
   return (
@@ -54,6 +65,8 @@ function App() {
       <Header
         onSearch={handleNewsSearch}
         onSignInClick={handleSignInClick}
+        onSignOutClick={handleSignOutClick}
+        isLoggedIn={isLoggedIn}
       ></Header>
       <Main
         isNewsListShown={isNewsListShown}
@@ -66,7 +79,10 @@ function App() {
       <About></About>
       <Footer></Footer>
       {isSigninOpen && (
-        <SignInModalForm onClose={handleSignClose}></SignInModalForm>
+        <SignInModalForm
+          onClose={handleSignClose}
+          onSignIn={handleSignIn}
+        ></SignInModalForm>
       )}
     </div>
   );

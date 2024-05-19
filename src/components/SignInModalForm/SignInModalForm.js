@@ -4,7 +4,7 @@ import "./SignInModalForm.css";
 import api from "../../utils/api";
 import ModalWithMessage from "../ModalWithMessage/ModalWithMessage";
 
-function SignInModalForm({ onClose }) {
+function SignInModalForm({ onClose, onSignIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -58,7 +58,16 @@ function SignInModalForm({ onClose }) {
     },
   ];
 
-  function handleSignIn() {}
+  async function handleSignIn() {
+    try {
+      const response = await api.signin(email, password);
+      const token = response.token;
+      token && localStorage.setItem("token", token);
+      onSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function handleSignUp() {
     try {
