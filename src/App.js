@@ -3,8 +3,9 @@ import Header from "./components/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer";
 import About from "./components/About";
-import newsApi from "./utils/api";
+import newsApi from "./utils/newsApi";
 import { useState } from "react";
+import SignInModalForm from "./components/SignInModalForm/SignInModalForm";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -14,6 +15,8 @@ function App() {
   const [currentSearchTerm, setCurrentSearchTerm] = useState("");
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const [isSigninOpen, setIsSignInOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function handleNewsSearch(searchTerm) {
     setCurrentSearchTerm(searchTerm);
@@ -39,9 +42,32 @@ function App() {
     });
   }
 
+  function handleSignInClick() {
+    setIsSignInOpen(true);
+  }
+
+  function handleSignOutClick() {
+    setIsLoggedIn(false);
+    localStorage.removeItem("token");
+  }
+
+  function handleSignClose() {
+    setIsSignInOpen(false);
+  }
+
+  function handleSignIn() {
+    setIsSignInOpen(false);
+    setIsLoggedIn(true);
+  }
+
   return (
     <div className="page">
-      <Header onSearch={handleNewsSearch}></Header>
+      <Header
+        onSearch={handleNewsSearch}
+        onSignInClick={handleSignInClick}
+        onSignOutClick={handleSignOutClick}
+        isLoggedIn={isLoggedIn}
+      ></Header>
       <Main
         isNewsListShown={isNewsListShown}
         cards={cards}
@@ -52,6 +78,12 @@ function App() {
       ></Main>
       <About></About>
       <Footer></Footer>
+      {isSigninOpen && (
+        <SignInModalForm
+          onClose={handleSignClose}
+          onSignIn={handleSignIn}
+        ></SignInModalForm>
+      )}
     </div>
   );
 }

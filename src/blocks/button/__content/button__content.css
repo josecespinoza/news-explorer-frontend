@@ -1,0 +1,9 @@
+.button__content {
+  margin: 0;
+  padding: 0;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+  justify-content: center;
+}

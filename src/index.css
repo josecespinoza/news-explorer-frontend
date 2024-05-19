@@ -1,5 +1,6 @@
 @import url("./vendor/normalize.css");
 @import url("./fonts/roboto/roboto.css");
+@import url("./fonts/inter/inter.css");
 @import url("./fonts/source_sans_pro/source_sans_pro.css");
 @import url("./blocks/page/page.css");
 @import url("./blocks/header/header.css");
@@ -11,6 +12,10 @@
 @import url("./blocks/navigator/__title/navigator__title.css");
 @import url("./blocks/navigator/__menu/navigator__menu.css");
 @import url("./blocks/button/button.css");
+@import url("./blocks/button/__content/button__content.css");
+@import url("./blocks/button/__icon/button__icon.css");
+@import url("./blocks/button/__text/button__text.css");
+@import url("./blocks/link-button/link-button.css");
 @import url("./blocks/navigator/__menu-button/navigator__menu-button.css");
 @import url("./blocks/navigator/__links/navigator__links.css");
 @import url("./blocks/navigator/__link/navigator__link.css");
@@ -37,3 +42,8 @@
 @import url("./blocks/footer/__link-icons/footer__link-icons.css");
 @import url("./blocks/footer/__link-icon/footer__link-icon.css");
 @import url("./blocks/footer/__icon/footer__icon.css");
+@import url("./blocks/modal/modal.css");
+@import url("./blocks/modal/__backdrop/modal__backdrop.css");
+@import url("./blocks/modal/__close/modal__close.css");
+@import url("./blocks/modal/__content/modal__content.css");
+@import url("./blocks/modal/__title/modal__title.css");

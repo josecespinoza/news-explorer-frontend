@@ -1,0 +1,12 @@
+.navigator__button {
+  background: none;
+  border: 1px white solid;
+  padding-left: 33px;
+  padding-right: 33px;
+  font-size: 18px;
+}
+
+.navigator__button_status_loggedin {
+  padding-left: 18px;
+  padding-right: 14px;
+}
