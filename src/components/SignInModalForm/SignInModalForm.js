@@ -112,16 +112,15 @@ function SignInModalForm({ onClose }) {
           onClose={handleClose}
           onChange={handleChange}
         >
-          <h4 className="signin__text">
+          <span className="signin__text">
             o{" "}
-            <a
-              href="#"
+            <button
               onClick={handleSignUpLinkClick}
-              className="signin__link"
+              className="link-button  signin__link-button"
             >
               inscribirse
-            </a>
-          </h4>
+            </button>
+          </span>
         </ModalWithForm>
       )}
       {isSignUpOpen && (
@@ -134,16 +133,15 @@ function SignInModalForm({ onClose }) {
           onClose={handleClose}
           onChange={handleChange}
         >
-          <h4 className="signin__text">
+          <span className="signin__text">
             o{" "}
-            <a
-              href="#"
+            <button
               onClick={handleSignInLinkClick}
-              className="signin__link"
+              className="link-button signin__link-button"
             >
               iniciar sesión
-            </a>
-          </h4>
+            </button>
+          </span>
         </ModalWithForm>
       )}
       {isSignUpSuccess && (

@@ -8,11 +8,9 @@
   height: 20px;
 }
 
-.signin__link {
+.signin__link-button {
   margin: 0;
   padding: 0;
   font: inherit;
   color: #2f71e5;
-  text-align: center;
-  text-decoration: none;
 }
