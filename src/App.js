@@ -65,10 +65,9 @@ function App() {
       ></Main>
       <About></About>
       <Footer></Footer>
-      <SignInModalForm
-        isOpen={isSigninOpen}
-        onClose={handleSignClose}
-      ></SignInModalForm>
+      {isSigninOpen && (
+        <SignInModalForm onClose={handleSignClose}></SignInModalForm>
+      )}
     </div>
   );
 }

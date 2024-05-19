@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./SignInModalForm.css";
+import api from "../../utils/api";
+import ModalWithMessage from "../ModalWithMessage/ModalWithMessage";
 
-function SignInModalForm({ isOpen, onClose }) {
+function SignInModalForm({ onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(true);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const [isSignUpSuccess, setIsSignUpSuccess] = useState(false);
 
   useEffect(() => {
     handleValidation();
-  }, [email, password]);
+  }, [email, password, username]);
 
   const signInInputs = [
     {
@@ -56,9 +60,20 @@ function SignInModalForm({ isOpen, onClose }) {
 
   function handleSignIn() {}
 
-  function handleSignUp() {}
+  async function handleSignUp() {
+    try {
+      await api.signup(email, password, username);
+      setIsSignUpOpen(false);
+      setIsSignUpSuccess(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   function handleClose() {
+    /* setIsSignInOpen(true);
+    setIsSignUpOpen(false);
+    setIsSignUpSuccess(false); */
     onClose();
   }
 
@@ -70,6 +85,7 @@ function SignInModalForm({ isOpen, onClose }) {
   function handleChange(input) {
     input.name === "email" && setEmail(input.value);
     input.name === "password" && setPassword(input.value);
+    input.name === "username" && setUsername(input.value);
   }
 
   function handleSignInLinkClick(evt) {
@@ -77,6 +93,7 @@ function SignInModalForm({ isOpen, onClose }) {
     setIsSignInOpen(true);
     setIsSignUpOpen(false);
   }
+
   function handleSignUpLinkClick(evt) {
     evt.preventDefault();
     setIsSignInOpen(false);
@@ -85,7 +102,7 @@ function SignInModalForm({ isOpen, onClose }) {
 
   return (
     <>
-      {isOpen && isSignInOpen && (
+      {isSignInOpen && (
         <ModalWithForm
           title="Iniciar sesión"
           buttonLabel="Iniciar sesión"
@@ -107,7 +124,7 @@ function SignInModalForm({ isOpen, onClose }) {
           </h4>
         </ModalWithForm>
       )}
-      {isOpen && isSignUpOpen && (
+      {isSignUpOpen && (
         <ModalWithForm
           title="Inscribirse"
           buttonLabel="Inscribirse"
@@ -128,6 +145,12 @@ function SignInModalForm({ isOpen, onClose }) {
             </a>
           </h4>
         </ModalWithForm>
+      )}
+      {isSignUpSuccess && (
+        <ModalWithMessage
+          message="¡El registro se ha completado con éxito!"
+          onClose={handleClose}
+        ></ModalWithMessage>
       )}
     </>
   );

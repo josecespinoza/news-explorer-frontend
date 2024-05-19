@@ -1,15 +1,22 @@
-const newsApi = {};
-newsApi.getNews = async (searchTerm, page = 1) => {
-  const response = await fetch(
-    `${process.env.REACT_APP_API_URL}?q=${searchTerm}&from=2024-04-30&to=2024-05-07&pageSize=${process.env.REACT_APP_NEWS_PAGE_SIZE}&page=${page}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: process.env.REACT_APP_API_KEY,
-      },
+const api = {
+  signup: async (email, password, username) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          username,
+        }),
+      });
+      return response;
+    } catch (err) {
+      console.error(err);
     }
-  );
-  return response.ok && response.json();
+  },
 };
 
-export default newsApi;
+module.exports = api;
