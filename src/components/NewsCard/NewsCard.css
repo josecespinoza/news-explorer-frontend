@@ -43,10 +43,13 @@
   top: 0;
   margin-top: 24px;
   margin-right: 24px;
-  width: 40px;
-  height: 40px;
-  padding: 8px;
+  width: auto;
+  height: auto;
+  padding: 0;
   border-radius: 8px;
+}
+
+.news-card__button:hover {
 }
 
 .news-card__date {

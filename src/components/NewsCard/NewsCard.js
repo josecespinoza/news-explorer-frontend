@@ -17,11 +17,13 @@ function NewsCard({ card }) {
         onClick={handleSaveCardClick}
       >
         <div className="button__content">
-          <img
-            className="button__icon"
-            alt="bookmark icon"
-            src={bookmark}
-          ></img>
+          <div className="button__icon-container">
+            <img
+              className="button__icon button__icon_action_bookmark"
+              alt="bookmark icon"
+              src={bookmark}
+            ></img>
+          </div>
         </div>
       </button>
       <img src={card.urlToImage} alt="" className="news-card__photo" />
