@@ -1,9 +1,11 @@
 import "./NewsCard.css";
 import bookmark from "../../images/bookmark.svg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AuthContext from "../../contexts/AuthContext";
 
 function NewsCard({ card }) {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+  const isLoggedIn = useContext(AuthContext);
 
   const publishedAt = new Date(card.publishedAt).toLocaleString("es-PE", {
     day: "2-digit",
@@ -20,7 +22,7 @@ function NewsCard({ card }) {
   return (
     <li className="news-card">
       <div className="news-card__bookmark">
-        {isTooltipOpen && (
+        {isTooltipOpen && !isLoggedIn && (
           <div className="news-card__bookmark-tooltip">
             <h6 className="news-card__bookmark-text">
               Inicia sesión para guardar artículos

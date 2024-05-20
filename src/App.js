@@ -6,6 +6,7 @@ import About from "./components/About";
 import newsApi from "./utils/newsApi";
 import { useState } from "react";
 import SignInModalForm from "./components/SignInModalForm/SignInModalForm";
+import AuthContext from "./contexts/AuthContext";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -62,28 +63,30 @@ function App() {
 
   return (
     <div className="page">
-      <Header
-        onSearch={handleNewsSearch}
-        onSignInClick={handleSignInClick}
-        onSignOutClick={handleSignOutClick}
-        isLoggedIn={isLoggedIn}
-      ></Header>
-      <Main
-        isNewsListShown={isNewsListShown}
-        cards={cards}
-        isSearching={isSearching}
-        isSearchingMore={isSearchingMore}
-        onClickViewMore={handleViewMore}
-        isLastPage={totalPages === currentPage}
-      ></Main>
-      <About></About>
-      <Footer></Footer>
-      {isSigninOpen && (
-        <SignInModalForm
-          onClose={handleSignClose}
-          onSignIn={handleSignIn}
-        ></SignInModalForm>
-      )}
+      <AuthContext.Provider value={isLoggedIn}>
+        <Header
+          onSearch={handleNewsSearch}
+          onSignInClick={handleSignInClick}
+          onSignOutClick={handleSignOutClick}
+          isLoggedIn={isLoggedIn}
+        ></Header>
+        <Main
+          isNewsListShown={isNewsListShown}
+          cards={cards}
+          isSearching={isSearching}
+          isSearchingMore={isSearchingMore}
+          onClickViewMore={handleViewMore}
+          isLastPage={totalPages === currentPage}
+        ></Main>
+        <About></About>
+        <Footer></Footer>
+        {isSigninOpen && (
+          <SignInModalForm
+            onClose={handleSignClose}
+            onSignIn={handleSignIn}
+          ></SignInModalForm>
+        )}
+      </AuthContext.Provider>
     </div>
   );
 }
