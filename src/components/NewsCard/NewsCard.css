@@ -19,6 +19,39 @@
   position: relative;
 }
 
+.news-card__bookmark {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 24px;
+  margin-right: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  column-gap: 5px;
+}
+
+.news-card__bookmark-tooltip {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  width: 182px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.news-card__bookmark-text {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1.172;
+}
+
 .news-card__photo {
   margin: 0;
   padding: 0;
@@ -38,18 +71,11 @@
 }
 
 .news-card__button {
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin-top: 24px;
-  margin-right: 24px;
   width: auto;
   height: auto;
   padding: 0;
   border-radius: 8px;
-}
-
-.news-card__button:hover {
+  background-color: #fff;
 }
 
 .news-card__date {
