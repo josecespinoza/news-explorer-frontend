@@ -17,10 +17,11 @@ function Main({
   const isLoggedIn = useContext(AuthContext);
 
   useEffect(() => {
-    isLoggedIn &&
-      api.getArticles().then((articles) => {
-        setSavedArticles(articles);
-      });
+    isLoggedIn
+      ? api.getArticles().then((articles) => {
+          setSavedArticles(articles);
+        })
+      : setSavedArticles([]);
   }, [isLoggedIn]);
 
   async function saveArticle(article) {
