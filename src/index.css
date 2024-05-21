@@ -14,6 +14,8 @@
 @import url("./blocks/button/button.css");
 @import url("./blocks/button/__content/button__content.css");
 @import url("./blocks/button/__icon/button__icon.css");
+@import url("./blocks/button/__icon/_action/button__icon_action_bookmark.css");
+@import url("./blocks/button/__icon-container/button__icon-container.css");
 @import url("./blocks/button/__text/button__text.css");
 @import url("./blocks/link-button/link-button.css");
 @import url("./blocks/navigator/__menu-button/navigator__menu-button.css");

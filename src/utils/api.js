@@ -34,6 +34,74 @@ const api = {
       console.error(err);
     }
   },
+  getArticles: async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/articles`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      return await response.json();
+    } catch (err) {
+      console.error(err);
+    }
+  },
+  deleteArticle: async (articleId) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/articles/${articleId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      return await response.json();
+    } catch (err) {
+      console.error(err);
+    }
+  },
+  saveArticle: async ({
+    keyword,
+    title,
+    description,
+    publishDate,
+    source,
+    url,
+    photo,
+  }) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/articles`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            keyword,
+            title,
+            description,
+            publishDate,
+            source,
+            url,
+            photo,
+          }),
+        }
+      );
+      return await response.json();
+    } catch (err) {
+      console.error(err);
+    }
+  },
 };
 
 module.exports = api;
