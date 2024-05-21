@@ -1,9 +1,10 @@
 import "./NewsCard.css";
-import bookmark from "../../images/bookmark.svg";
+import unbookmarked from "../../images/unbookmarked.svg";
+import bookmarked from "../../images/bookmarked.svg";
 import { useContext, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
 
-function NewsCard({ card }) {
+function NewsCard({ card, isBookmarked, onBookmark }) {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const isLoggedIn = useContext(AuthContext);
 
@@ -13,7 +14,12 @@ function NewsCard({ card }) {
     year: "numeric",
   });
 
-  function handleSaveCardClick() {}
+  async function handleBookmark() {
+    if (!isLoggedIn) {
+      return;
+    }
+    onBookmark(card);
+  }
 
   function toogleBookmarkTooltip() {
     setIsTooltipOpen(!isTooltipOpen);
@@ -31,7 +37,7 @@ function NewsCard({ card }) {
         )}
         <button
           className="button news-card__button"
-          onClick={handleSaveCardClick}
+          onClick={handleBookmark}
           onMouseEnter={toogleBookmarkTooltip}
           onMouseLeave={toogleBookmarkTooltip}
         >
@@ -40,7 +46,7 @@ function NewsCard({ card }) {
               <img
                 className="button__icon button__icon_action_bookmark"
                 alt="bookmark icon"
-                src={bookmark}
+                src={isBookmarked ? bookmarked : unbookmarked}
               ></img>
             </div>
           </div>

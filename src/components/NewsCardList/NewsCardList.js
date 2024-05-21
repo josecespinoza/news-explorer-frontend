@@ -1,9 +1,9 @@
-import NewsCard from "../NewsCard/NewsCard";
 import Preloader from "../PreLoader/Preloader";
 import "./NewsCardList.css";
 import notFoundLogo from "../../images/not-found_v1.svg";
 
 function NewsCardList({
+  children,
   cards,
   isSearching,
   isSearchingMore,
@@ -41,11 +41,7 @@ function NewsCardList({
           <h2 className="news__title news__title_position_left news__title_size_medium">
             Resultados de la b&uacute;squeda
           </h2>
-          <ul className="news__list">
-            {cards.map((card, id) => (
-              <NewsCard key={id} card={card}></NewsCard>
-            ))}
-          </ul>
+          <ul className="news__list">{children}</ul>
           {isSearchingMore && (
             <>
               <Preloader></Preloader>
