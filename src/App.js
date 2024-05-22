@@ -7,9 +7,11 @@ import newsApi from "./utils/newsApi";
 import { useState } from "react";
 import SignInModalForm from "./components/SignInModalForm/SignInModalForm";
 import AuthContext from "./contexts/AuthContext";
+import api from "./utils/api";
 
 function App() {
-  const [cards, setCards] = useState([]);
+  const [articles, setArticles] = useState([]);
+  const [savedArticles, setSavedArticles] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [isSearchingMore, setIsSearchingMore] = useState(false);
   const [isNewsListShown, setIsNewsListShown] = useState(false);
@@ -29,7 +31,7 @@ function App() {
         Math.ceil(result.totalResults / process.env.REACT_APP_NEWS_PAGE_SIZE)
       );
       setIsSearching(false);
-      result.articles && setCards(result.articles);
+      result.articles && setArticles(result.articles);
     });
   }
 
@@ -39,7 +41,7 @@ function App() {
     setIsSearchingMore(true);
     newsApi.getNews(currentSearchTerm, nextPage).then((result) => {
       setIsSearchingMore(false);
-      setCards((prevCards) => [...prevCards, ...result.articles]);
+      setArticles((prevArticles) => [...prevArticles, ...result.articles]);
     });
   }
 
@@ -50,15 +52,28 @@ function App() {
   function handleSignOutClick() {
     setIsLoggedIn(false);
     localStorage.removeItem("token");
+    setSavedArticles([]);
   }
 
   function handleSignClose() {
     setIsSignInOpen(false);
   }
 
-  function handleSignIn() {
+  async function handleSignIn() {
     setIsSignInOpen(false);
     setIsLoggedIn(true);
+    const articles = await api.getArticles();
+    setSavedArticles(articles);
+  }
+
+  function handleArticleBookmark(article, isBookmark) {
+    setSavedArticles((prevSavedArticles) => {
+      return isBookmark
+        ? [...prevSavedArticles, article]
+        : prevSavedArticles.filter(
+            (savedArticle) => savedArticle._id !== article._id
+          );
+    });
   }
 
   return (
@@ -71,8 +86,10 @@ function App() {
           isLoggedIn={isLoggedIn}
         ></Header>
         <Main
+          cards={articles}
+          savedCards={savedArticles}
+          onCardBookmark={handleArticleBookmark}
           isNewsListShown={isNewsListShown}
-          cards={cards}
           isSearching={isSearching}
           isSearchingMore={isSearchingMore}
           onClickViewMore={handleViewMore}

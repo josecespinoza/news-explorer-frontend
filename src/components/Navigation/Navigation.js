@@ -19,7 +19,7 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn }) {
           <button className="button navigator__menu-button"></button>
           <section className="navigator__menu">
             <section className="navigator__links">
-              <Link className="navigator__link" to="/inicio">
+              <Link className="navigator__link" to="/">
                 Inicio
               </Link>
             </section>

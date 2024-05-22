@@ -2,71 +2,53 @@ import NewsCard from "../NewsCard/NewsCard";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./Main.css";
 import api from "../../utils/api";
-import AuthContext from "../../contexts/AuthContext";
-import { useContext, useEffect, useState } from "react";
 
 function Main({
   cards,
+  savedCards,
+  onCardBookmark,
   isNewsListShown,
   isSearching,
   isSearchingMore,
   onClickViewMore,
   isLastPage,
 }) {
-  const [savedArticles, setSavedArticles] = useState([]);
-  const isLoggedIn = useContext(AuthContext);
-
-  useEffect(() => {
-    isLoggedIn
-      ? api.getArticles().then((articles) => {
-          setSavedArticles(articles);
-        })
-      : setSavedArticles([]);
-  }, [isLoggedIn]);
-
-  async function saveArticle(article) {
+  async function saveCard(card) {
     try {
+      //TODO: Track searched keyword
       const response = await api.saveArticle({
         keyword: "some text",
-        title: article.title,
-        description: article.description,
-        publishDate: article.publishedAt,
-        source: article.source.name,
-        url: article.url,
-        photo: article.urlToImage,
+        title: card.title,
+        description: card.description,
+        publishDate: card.publishedAt,
+        source: card.source.name,
+        url: card.url,
+        photo: card.urlToImage,
       });
-      setSavedArticles((prevSavedArticles) => [
-        ...prevSavedArticles,
-        response.article,
-      ]);
+      const savedArticle = response.article;
+      onCardBookmark(savedArticle, true);
     } catch (err) {
       console.log(err);
     }
   }
-  async function deleteArticle(savedArticle) {
+  async function deleteCard(card) {
     try {
-      const response = await api.deleteArticle(savedArticle._id);
-      setSavedArticles((prevSavedArticles) =>
-        prevSavedArticles.filter((article) => article._id !== savedArticle._id)
-      );
+      await api.deleteArticle(card._id);
+      onCardBookmark(card, false);
     } catch (err) {
       console.log(err);
     }
   }
 
-  function isBookmarked(article) {
-    const isBookmarked = savedArticles.some(
-      (savedArticle) => savedArticle.url === article.url
-    );
-    return isBookmarked;
+  function isBookmarked(card) {
+    return savedCards.some((savedCard) => savedCard.url === card.url);
   }
 
-  async function handleArticleBookmark(article) {
-    const savedArticle = savedArticles.find(
-      (savedArticle) => savedArticle.url === article.url
+  async function handleCardBookmark(card) {
+    const savedCard = savedCards.find(
+      (savedCard) => savedCard.url === card.url
     );
-    console.log("savedArticle", savedArticle);
-    !savedArticle ? saveArticle(article) : deleteArticle(savedArticle);
+    !savedCard ? saveCard(card) : deleteCard(savedCard);
   }
 
   return (
@@ -85,7 +67,7 @@ function Main({
                 key={index}
                 card={card}
                 isBookmarked={isBookmarked(card)}
-                onBookmark={handleArticleBookmark}
+                onBookmark={handleCardBookmark}
               ></NewsCard>
             ))}
           </NewsCardList>
