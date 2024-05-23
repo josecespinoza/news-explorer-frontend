@@ -5,10 +5,13 @@ import notFoundLogo from "../../images/not-found_v1.svg";
 function NewsCardList({
   children,
   cards,
-  isSearching,
-  isSearchingMore,
-  onViewMore,
-  isLastPage,
+  title = null,
+  isPaginated = false,
+  isSearching = false,
+  isSearchingMore = false,
+  onViewMore = null,
+  isLastPage = false,
+  customClassName = "",
 }) {
   function handleViewMore(evt) {
     evt.preventDefault();
@@ -19,6 +22,7 @@ function NewsCardList({
     const className = ["news"];
     isSearching && className.push("news_status_loading");
     cards.length === 0 && className.push("news_status_not-found");
+    customClassName && className.push(customClassName);
     return className.join(" ");
   }
 
@@ -38,9 +42,11 @@ function NewsCardList({
       )}
       {!isSearching && cards.length > 0 && (
         <>
-          <h2 className="news__title news__title_position_left news__title_size_medium">
-            Resultados de la b&uacute;squeda
-          </h2>
+          {title && (
+            <h2 className="news__title news__title_position_left news__title_size_medium">
+              {title}
+            </h2>
+          )}
           <ul className="news__list">{children}</ul>
           {isSearchingMore && (
             <>
@@ -48,7 +54,7 @@ function NewsCardList({
               <h3 className="news__description">Buscando Noticias...</h3>
             </>
           )}
-          {!isLastPage && (
+          {!isLastPage && isPaginated && (
             <button className="button news__button" onClick={handleViewMore}>
               Ver m&aacute;s
             </button>

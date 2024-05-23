@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import signOutIcon from "../../images/signout.svg";
 import "./Navigation.css";
+import AuthContext from "../../contexts/AuthContext";
 
 function Navigation({ onSignInClick, onSignOutClick, isLoggedIn }) {
   function handleSignInClick() {
@@ -22,6 +23,11 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn }) {
               <Link className="navigator__link" to="/">
                 Inicio
               </Link>
+              {isLoggedIn && (
+                <Link className="navigator__link" to="/saved-news">
+                  Artículos Guardados
+                </Link>
+              )}
             </section>
             {!isLoggedIn && (
               <button

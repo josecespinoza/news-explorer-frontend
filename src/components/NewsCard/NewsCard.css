@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   width: 100%;
+  min-width: calc((100% - 32px) / 3);
   height: 576px;
   background-color: #fff;
   display: grid;

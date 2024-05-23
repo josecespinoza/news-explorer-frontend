@@ -1,13 +1,17 @@
 import "./App.css";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import newsApi from "./utils/newsApi";
 import { useState } from "react";
 import SignInModalForm from "./components/SignInModalForm/SignInModalForm";
+import SavedNews from "./components/SavedNews/SavedNews";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import AuthContext from "./contexts/AuthContext";
 import api from "./utils/api";
+import { Route } from "react-router-dom";
+import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -21,28 +25,62 @@ function App() {
   const [isSigninOpen, setIsSignInOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  function handleNewsSearch(searchTerm) {
+  async function handleNewsSearch(searchTerm) {
     setCurrentSearchTerm(searchTerm);
     setIsNewsListShown(true);
     setIsSearching(true);
-    newsApi.getNews(searchTerm).then((result) => {
+    try {
+      const result = await newsApi.getNews(searchTerm);
       setCurrentPage(1);
       setTotalPages(
         Math.ceil(result.totalResults / process.env.REACT_APP_NEWS_PAGE_SIZE)
       );
       setIsSearching(false);
-      result.articles && setArticles(result.articles);
-    });
+      const normalizedArticles =
+        result.articles.length <= 0
+          ? []
+          : result.articles.map((article) => {
+              return {
+                keyword: searchTerm,
+                title: article.title,
+                description: article.description,
+                publishDate: article.publishedAt,
+                source: article.source.name,
+                url: article.url,
+                photo: article.urlToImage,
+              };
+            });
+      result.articles && setArticles(normalizedArticles);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
-  function handleViewMore() {
+  async function handleViewMore() {
     const nextPage = currentPage + 1;
     setCurrentPage(nextPage);
     setIsSearchingMore(true);
-    newsApi.getNews(currentSearchTerm, nextPage).then((result) => {
+    try {
+      const result = await newsApi.getNews(currentSearchTerm, nextPage);
+      const normalizedArticles =
+        result.articles.length <= 0
+          ? []
+          : result.articles.map((article) => {
+              return {
+                keyword: currentSearchTerm,
+                title: article.title,
+                description: article.description,
+                publishDate: article.publishedAt,
+                source: article.source.name,
+                url: article.url,
+                photo: article.urlToImage,
+              };
+            });
       setIsSearchingMore(false);
-      setArticles((prevArticles) => [...prevArticles, ...result.articles]);
-    });
+      setArticles((prevArticles) => [...prevArticles, ...normalizedArticles]);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   function handleSignInClick() {
@@ -85,17 +123,26 @@ function App() {
           onSignOutClick={handleSignOutClick}
           isLoggedIn={isLoggedIn}
         ></Header>
-        <Main
-          cards={articles}
-          savedCards={savedArticles}
-          onCardBookmark={handleArticleBookmark}
-          isNewsListShown={isNewsListShown}
-          isSearching={isSearching}
-          isSearchingMore={isSearchingMore}
-          onClickViewMore={handleViewMore}
-          isLastPage={totalPages === currentPage}
-        ></Main>
-        <About></About>
+        <Switch>
+          <Route exact path="/">
+            <>
+              <Main
+                cards={articles}
+                savedCards={savedArticles}
+                onCardBookmark={handleArticleBookmark}
+                isNewsListShown={isNewsListShown}
+                isSearching={isSearching}
+                isSearchingMore={isSearchingMore}
+                onClickViewMore={handleViewMore}
+                isLastPage={totalPages === currentPage}
+              ></Main>
+              <About></About>
+            </>
+          </Route>
+          <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedIn}>
+            <SavedNews savedCards={savedArticles}></SavedNews>
+          </ProtectedRoute>
+        </Switch>
         <Footer></Footer>
         {isSigninOpen && (
           <SignInModalForm

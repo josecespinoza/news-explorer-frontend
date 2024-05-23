@@ -16,15 +16,7 @@ function Main({
   async function saveCard(card) {
     try {
       //TODO: Track searched keyword
-      const response = await api.saveArticle({
-        keyword: "some text",
-        title: card.title,
-        description: card.description,
-        publishDate: card.publishedAt,
-        source: card.source.name,
-        url: card.url,
-        photo: card.urlToImage,
-      });
+      const response = await api.saveArticle(card);
       const savedArticle = response.article;
       onCardBookmark(savedArticle, true);
     } catch (err) {
@@ -53,26 +45,27 @@ function Main({
 
   return (
     <main className="main">
-      <section className="main__container">
-        {isNewsListShown && (
-          <NewsCardList
-            cards={cards}
-            isSearching={isSearching}
-            isSearchingMore={isSearchingMore}
-            onViewMore={onClickViewMore}
-            isLastPage={isLastPage}
-          >
-            {cards.map((card, index) => (
-              <NewsCard
-                key={index}
-                card={card}
-                isBookmarked={isBookmarked(card)}
-                onBookmark={handleCardBookmark}
-              ></NewsCard>
-            ))}
-          </NewsCardList>
-        )}
-      </section>
+      {isNewsListShown && (
+        <NewsCardList
+          customClassName="main__news"
+          cards={cards}
+          title="Resultados de la búsqueda"
+          isPaginated={true}
+          onViewMore={onClickViewMore}
+          isSearching={isSearching}
+          isSearchingMore={isSearchingMore}
+          isLastPage={isLastPage}
+        >
+          {cards.map((card, index) => (
+            <NewsCard
+              key={index}
+              card={card}
+              isBookmarked={isBookmarked(card)}
+              onBookmark={handleCardBookmark}
+            ></NewsCard>
+          ))}
+        </NewsCardList>
+      )}
     </main>
   );
 }

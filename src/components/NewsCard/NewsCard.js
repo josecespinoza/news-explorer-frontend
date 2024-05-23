@@ -8,7 +8,7 @@ function NewsCard({ card, isBookmarked, onBookmark }) {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const isLoggedIn = useContext(AuthContext);
 
-  const publishedAt = new Date(card.publishedAt).toLocaleString("es-PE", {
+  const publishDate = new Date(card.publishDate).toLocaleString("es-PE", {
     day: "2-digit",
     month: "long",
     year: "numeric",
@@ -52,12 +52,12 @@ function NewsCard({ card, isBookmarked, onBookmark }) {
           </div>
         </button>
       </div>
-      <img src={card.urlToImage} alt="" className="news-card__photo" />
+      <img src={card.photo} alt="" className="news-card__photo" />
       <section className="news-card__content">
-        <h4 className="news-card__date">{publishedAt}</h4>
+        <h4 className="news-card__date">{publishDate}</h4>
         <h3 className="news-card__title">{card.title}</h3>
         <p className="news-card__description">{card.description}</p>
-        <h3 className="news-card__publisher">{card.source.name}</h3>
+        <h3 className="news-card__publisher">{card.source}</h3>
       </section>
     </li>
   );
