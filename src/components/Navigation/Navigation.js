@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import signOutIcon from "../../images/signout.svg";
+import signOutIconLight from "../../images/signoutight.svg";
 import "./Navigation.css";
-import AuthContext from "../../contexts/AuthContext";
 
-function Navigation({ onSignInClick, onSignOutClick, isLoggedIn }) {
+function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
   function handleSignInClick() {
     onSignInClick();
   }
@@ -39,7 +39,9 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn }) {
             )}
             {isLoggedIn && (
               <button
-                className="button navigator__button navigator__button_status_loggedin"
+                className={`button navigator__button navigator__button_status_loggedin${
+                  theme && ` navigator__button_theme_${theme}`
+                }`}
                 onClick={handleSignOutClick}
               >
                 <div className="button__content">
@@ -47,7 +49,7 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn }) {
                   <img
                     className="button__icon"
                     alt="sign out logo"
-                    src={signOutIcon}
+                    src={theme === "light" ? signOutIconLight : signOutIcon}
                   ></img>
                 </div>
               </button>

@@ -3,7 +3,13 @@ import Navigation from "../Navigation/Navigation";
 import { useLocation } from "react-router-dom";
 import "./Header.css";
 
-function Header({ onSearch, onSignInClick, onSignOutClick, isLoggedIn }) {
+function Header({
+  onSearch,
+  onSignInClick,
+  onSignOutClick,
+  isLoggedIn,
+  theme = false,
+}) {
   const [searchTerm, setSearchTerm] = useState("");
   const location = useLocation();
 
@@ -25,11 +31,12 @@ function Header({ onSearch, onSignInClick, onSignOutClick, isLoggedIn }) {
   }
 
   return (
-    <header className="header">
+    <header className={`header${theme ? ` header__theme_${theme}` : ""}`}>
       <Navigation
         onSignInClick={handleSignInClick}
         onSignOutClick={handleSignOutClick}
         isLoggedIn={isLoggedIn}
+        theme={theme && theme}
       ></Navigation>
       {location.pathname === "/" && (
         <section className="header__content">

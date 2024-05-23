@@ -8,6 +8,13 @@
   width: 100%;
 }
 
+.header__theme_light {
+  background-image: none;
+  background-color: #fff;
+  box-shadow: none;
+  color: #1a1b22;
+}
+
 .header__content {
   height: 496px;
   display: grid;

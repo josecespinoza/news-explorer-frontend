@@ -11,7 +11,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import AuthContext from "./contexts/AuthContext";
 import api from "./utils/api";
 import { Route } from "react-router-dom";
-import { Switch } from "react-router-dom/cjs/react-router-dom.min";
+import { Switch, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -24,6 +24,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState(0);
   const [isSigninOpen, setIsSignInOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const location = useLocation();
 
   async function handleNewsSearch(searchTerm) {
     setCurrentSearchTerm(searchTerm);
@@ -135,6 +137,7 @@ function App() {
           onSignInClick={handleSignInClick}
           onSignOutClick={handleSignOutClick}
           isLoggedIn={isLoggedIn}
+          theme={location.pathname === "/saved-news" && "light"}
         ></Header>
         <Switch>
           <Route exact path="/">
