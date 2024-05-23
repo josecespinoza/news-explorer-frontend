@@ -1,8 +1,13 @@
+import api from "../../utils/api";
 import NewsCard from "../NewsCard/NewsCard";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./SavedNews.css";
 
-function SavedNews({ savedCards }) {
+function SavedNews({ savedCards, onCardRemove }) {
+  async function handleCardRemove(card) {
+    onCardRemove(card);
+  }
+
   function getUniqueKeywords(cards) {
     const keywords = cards.map(
       (card) =>
@@ -36,8 +41,10 @@ function SavedNews({ savedCards }) {
             <NewsCard
               key={index}
               card={savedCard}
-              isBookmarked={false}
+              isBookmarked={true}
               onBookmark={() => {}}
+              onRemove={handleCardRemove}
+              mode="remove"
             ></NewsCard>
           ))}
         </NewsCardList>

@@ -114,6 +114,19 @@ function App() {
     });
   }
 
+  async function handleArticleRemove(article) {
+    try {
+      const response = api.deleteArticle(article._id);
+      setSavedArticles((prevSavedArticles) => {
+        return prevSavedArticles.filter(
+          (savedArticle) => savedArticle._id !== article._id
+        );
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="page">
       <AuthContext.Provider value={isLoggedIn}>
@@ -140,7 +153,10 @@ function App() {
             </>
           </Route>
           <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedIn}>
-            <SavedNews savedCards={savedArticles}></SavedNews>
+            <SavedNews
+              savedCards={savedArticles}
+              onCardRemove={handleArticleRemove}
+            ></SavedNews>
           </ProtectedRoute>
         </Switch>
         <Footer></Footer>
