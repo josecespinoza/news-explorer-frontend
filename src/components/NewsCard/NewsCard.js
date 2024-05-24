@@ -46,8 +46,8 @@ function NewsCard({
       )}
       <div className="news-card__bookmark">
         {isTooltipOpen && !isLoggedIn && (
-          <div className="news-card__bookmark-tooltip">
-            <h6 className="news-card__bookmark-text">
+          <div className="news-card__tooltip">
+            <h6 className="news-card__tooltip-text">
               Inicia sesión para guardar artículos
             </h6>
           </div>
@@ -73,6 +73,11 @@ function NewsCard({
 
         {mode === "saved" && (
           <>
+            {isTooltipOpen && (
+              <div className="news-card__tooltip news-card__tooltip_size_small">
+                <h6 className="news-card__tooltip-text">Remove from saved</h6>
+              </div>
+            )}
             <button
               className="button news-card__button"
               onClick={handleRemove}

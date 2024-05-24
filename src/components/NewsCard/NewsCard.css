@@ -32,7 +32,7 @@
   column-gap: 5px;
 }
 
-.news-card__bookmark-tooltip {
+.news-card__tooltip {
   margin: 0;
   padding: 0;
   background-color: #fff;
@@ -44,7 +44,11 @@
   justify-content: center;
 }
 
-.news-card__bookmark-text {
+.news-card__tooltip_size_small {
+  width: 159px;
+}
+
+.news-card__tooltip-text {
   margin: 0;
   padding: 0;
   font-family: "Roboto";
@@ -221,8 +225,14 @@
   }
 }
 
+@media screen and (max-width: 1300px) {
+  .news-card__tooltip_size_small {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 900px) {
-  .news-card__bookmark-tooltip {
+  .news-card__tooltip {
     display: none;
   }
 }
