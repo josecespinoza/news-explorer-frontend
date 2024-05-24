@@ -75,7 +75,7 @@ function NewsCard({
             <div className="button__content">
               <div className="button__icon-container">
                 <img
-                  className="button__icon button__icon_action_bookmark"
+                  className="button__icon button__icon_location_card"
                   alt="trash icon"
                   src={trash}
                 ></img>

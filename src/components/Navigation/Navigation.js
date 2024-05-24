@@ -40,7 +40,7 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
             {isLoggedIn && (
               <button
                 className={`button navigator__button navigator__button_status_loggedin${
-                  theme && ` navigator__button_theme_${theme}`
+                  theme ? ` navigator__button_theme_${theme}` : ""
                 }`}
                 onClick={handleSignOutClick}
               >
