@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import signOutIcon from "../../images/signout.svg";
 import signOutIconLight from "../../images/signoutight.svg";
 import "./Navigation.css";
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
+import { capitalize } from "../../utils/utils";
 
 function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
+  const userInfo = useContext(UserContext);
+
   function handleSignInClick() {
     onSignInClick();
   }
@@ -45,7 +50,9 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
                 onClick={handleSignOutClick}
               >
                 <div className="button__content">
-                  <span className="button__text">Elise</span>
+                  <span className="button__text">
+                    {capitalize(userInfo.username)}
+                  </span>
                   <img
                     className="button__icon"
                     alt="sign out logo"

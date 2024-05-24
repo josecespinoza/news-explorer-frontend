@@ -1,9 +1,13 @@
-import api from "../../utils/api";
+import { useContext } from "react";
 import NewsCard from "../NewsCard/NewsCard";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./SavedNews.css";
+import UserContext from "../../contexts/UserContext";
+import { capitalize } from "../../utils/utils";
 
 function SavedNews({ savedCards, onCardRemove }) {
+  const userInfo = useContext(UserContext);
+
   async function handleCardRemove(card) {
     onCardRemove(card);
   }
@@ -26,7 +30,9 @@ function SavedNews({ savedCards, onCardRemove }) {
         <section className="saved-news__header">
           <h6 className="saved-news__section-title">Artículos guardados</h6>
           <h3 className="saved-news__title">
-            {`Elise, tienes ${savedCards.length} artículos 
+            {`${capitalize(userInfo.username)}, tienes ${
+              savedCards.length
+            } artículos 
             guardados`}
           </h3>
           <h5 className="saved-news__legend">

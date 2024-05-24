@@ -33,6 +33,7 @@
 .navigator__button_status_loggedin {
   padding-left: 18px;
   padding-right: 14px;
+  width: auto;
 }
 
 .navigator__button_theme_light {

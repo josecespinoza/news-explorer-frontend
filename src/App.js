@@ -9,6 +9,7 @@ import SignInModalForm from "./components/SignInModalForm/SignInModalForm";
 import SavedNews from "./components/SavedNews/SavedNews";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import AuthContext from "./contexts/AuthContext";
+import UserContext from "./contexts/UserContext";
 import api from "./utils/api";
 import { Route } from "react-router-dom";
 import { Switch, useLocation } from "react-router-dom/cjs/react-router-dom.min";
@@ -24,6 +25,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(0);
   const [isSigninOpen, setIsSignInOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
 
   const location = useLocation();
 
@@ -102,8 +104,14 @@ function App() {
   async function handleSignIn() {
     setIsSignInOpen(false);
     setIsLoggedIn(true);
-    const articles = await api.getArticles();
-    setSavedArticles(articles);
+    try {
+      const articles = await api.getArticles();
+      setSavedArticles(articles);
+      const userInfo = await api.getUserInfo();
+      setUserInfo(userInfo);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   function handleArticleBookmark(article, isBookmark) {
@@ -118,7 +126,7 @@ function App() {
 
   async function handleArticleRemove(article) {
     try {
-      const response = api.deleteArticle(article._id);
+      api.deleteArticle(article._id);
       setSavedArticles((prevSavedArticles) => {
         return prevSavedArticles.filter(
           (savedArticle) => savedArticle._id !== article._id
@@ -132,43 +140,45 @@ function App() {
   return (
     <div className="page">
       <AuthContext.Provider value={isLoggedIn}>
-        <Header
-          onSearch={handleNewsSearch}
-          onSignInClick={handleSignInClick}
-          onSignOutClick={handleSignOutClick}
-          isLoggedIn={isLoggedIn}
-          theme={location.pathname === "/saved-news" && "light"}
-        ></Header>
-        <Switch>
-          <Route exact path="/">
-            <>
-              <Main
-                cards={articles}
+        <UserContext.Provider value={userInfo}>
+          <Header
+            onSearch={handleNewsSearch}
+            onSignInClick={handleSignInClick}
+            onSignOutClick={handleSignOutClick}
+            isLoggedIn={isLoggedIn}
+            theme={location.pathname === "/saved-news" && "light"}
+          ></Header>
+          <Switch>
+            <Route exact path="/">
+              <>
+                <Main
+                  cards={articles}
+                  savedCards={savedArticles}
+                  onCardBookmark={handleArticleBookmark}
+                  isNewsListShown={isNewsListShown}
+                  isSearching={isSearching}
+                  isSearchingMore={isSearchingMore}
+                  onClickViewMore={handleViewMore}
+                  isLastPage={totalPages === currentPage}
+                ></Main>
+                <About></About>
+              </>
+            </Route>
+            <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedIn}>
+              <SavedNews
                 savedCards={savedArticles}
-                onCardBookmark={handleArticleBookmark}
-                isNewsListShown={isNewsListShown}
-                isSearching={isSearching}
-                isSearchingMore={isSearchingMore}
-                onClickViewMore={handleViewMore}
-                isLastPage={totalPages === currentPage}
-              ></Main>
-              <About></About>
-            </>
-          </Route>
-          <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedIn}>
-            <SavedNews
-              savedCards={savedArticles}
-              onCardRemove={handleArticleRemove}
-            ></SavedNews>
-          </ProtectedRoute>
-        </Switch>
-        <Footer></Footer>
-        {isSigninOpen && (
-          <SignInModalForm
-            onClose={handleSignClose}
-            onSignIn={handleSignIn}
-          ></SignInModalForm>
-        )}
+                onCardRemove={handleArticleRemove}
+              ></SavedNews>
+            </ProtectedRoute>
+          </Switch>
+          <Footer></Footer>
+          {isSigninOpen && (
+            <SignInModalForm
+              onClose={handleSignClose}
+              onSignIn={handleSignIn}
+            ></SignInModalForm>
+          )}
+        </UserContext.Provider>
       </AuthContext.Provider>
     </div>
   );
