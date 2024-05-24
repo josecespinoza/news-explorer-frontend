@@ -91,12 +91,6 @@
   color: inherit;
 }
 
-@media screen and (max-width: 768px) {
-  .navigator__link {
-    width: 60px;
-  }
-}
-
 .navigator__links {
   margin: 0;
   padding: 0;

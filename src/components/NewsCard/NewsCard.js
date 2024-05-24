@@ -4,6 +4,7 @@ import bookmarked from "../../images/bookmarked.svg";
 import trash from "../../images/trash.svg";
 import { useContext, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
+import { capitalize } from "../../utils/utils";
 
 function NewsCard({
   card,
@@ -38,6 +39,11 @@ function NewsCard({
 
   return (
     <li className="news-card">
+      {mode === "saved" && (
+        <div className="news-card__keyword-container">
+          <h6 className="news-card__keyword">{capitalize(card.keyword)}</h6>
+        </div>
+      )}
       <div className="news-card__bookmark">
         {isTooltipOpen && !isLoggedIn && (
           <div className="news-card__bookmark-tooltip">
@@ -65,23 +71,25 @@ function NewsCard({
           </button>
         )}
 
-        {mode === "remove" && (
-          <button
-            className="button news-card__button"
-            onClick={handleRemove}
-            onMouseEnter={toogleBookmarkTooltip}
-            onMouseLeave={toogleBookmarkTooltip}
-          >
-            <div className="button__content">
-              <div className="button__icon-container">
-                <img
-                  className="button__icon button__icon_location_card"
-                  alt="trash icon"
-                  src={trash}
-                ></img>
+        {mode === "saved" && (
+          <>
+            <button
+              className="button news-card__button"
+              onClick={handleRemove}
+              onMouseEnter={toogleBookmarkTooltip}
+              onMouseLeave={toogleBookmarkTooltip}
+            >
+              <div className="button__content">
+                <div className="button__icon-container">
+                  <img
+                    className="button__icon button__icon_location_card"
+                    alt="trash icon"
+                    src={trash}
+                  ></img>
+                </div>
               </div>
-            </div>
-          </button>
+            </button>
+          </>
         )}
       </div>
       <img src={card.photo} alt="" className="news-card__photo" />

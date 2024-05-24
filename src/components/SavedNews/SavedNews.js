@@ -50,7 +50,7 @@ function SavedNews({ savedCards, onCardRemove }) {
               isBookmarked={true}
               onBookmark={() => {}}
               onRemove={handleCardRemove}
-              mode="remove"
+              mode="saved"
             ></NewsCard>
           ))}
         </NewsCardList>

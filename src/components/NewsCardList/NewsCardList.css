@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   display: flex;
-  width: calc(100% - 208px);
+  width: 100% - 208px;
   flex-direction: column;
   align-items: center;
   row-gap: 64px;

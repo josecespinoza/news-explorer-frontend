@@ -51,7 +51,7 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
               >
                 <div className="button__content">
                   <span className="button__text">
-                    {capitalize(userInfo.username)}
+                    {userInfo?.username && capitalize(userInfo.username)}
                   </span>
                   <img
                     className="button__icon"
