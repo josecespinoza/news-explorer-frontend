@@ -64,8 +64,8 @@ function SignInModalForm({ onClose, onSignIn }) {
       const token = response.token;
       token && localStorage.setItem("token", token);
       onSignIn();
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -74,8 +74,8 @@ function SignInModalForm({ onClose, onSignIn }) {
       await api.signup(email, password, username);
       setIsSignUpOpen(false);
       setIsSignUpSuccess(true);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   }
 

@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import signOutIcon from "../../images/signout.svg";
+import signOutIconLight from "../../images/signoutight.svg";
 import "./Navigation.css";
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
+import { capitalize } from "../../utils/utils";
 
-function Navigation({ onSignInClick, onSignOutClick, isLoggedIn }) {
+function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
+  const userInfo = useContext(UserContext);
+
   function handleSignInClick() {
     onSignInClick();
   }
@@ -19,9 +25,14 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn }) {
           <button className="button navigator__menu-button"></button>
           <section className="navigator__menu">
             <section className="navigator__links">
-              <Link className="navigator__link" to="/inicio">
+              <Link className="navigator__link" to="/">
                 Inicio
               </Link>
+              {isLoggedIn && (
+                <Link className="navigator__link" to="/saved-news">
+                  Artículos Guardados
+                </Link>
+              )}
             </section>
             {!isLoggedIn && (
               <button
@@ -33,15 +44,19 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn }) {
             )}
             {isLoggedIn && (
               <button
-                className="button navigator__button navigator__button_status_loggedin"
+                className={`button navigator__button navigator__button_status_loggedin${
+                  theme ? ` navigator__button_theme_${theme}` : ""
+                }`}
                 onClick={handleSignOutClick}
               >
                 <div className="button__content">
-                  <span className="button__text">Elise</span>
+                  <span className="button__text">
+                    {userInfo?.username && capitalize(userInfo.username)}
+                  </span>
                   <img
                     className="button__icon"
                     alt="sign out logo"
-                    src={signOutIcon}
+                    src={theme === "light" ? signOutIconLight : signOutIcon}
                   ></img>
                 </div>
               </button>

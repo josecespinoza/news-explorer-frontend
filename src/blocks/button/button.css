@@ -6,7 +6,7 @@
   font-weight: 500;
   color: inherit;
   border-radius: 30px;
-  padding: 12px;
+  padding: 11px;
   width: auto;
   line-height: 24px;
   cursor: pointer;
@@ -14,7 +14,7 @@
 
 @media screen and (max-width: 768px) {
   .button {
-    padding: 8px;
+    padding: 7px;
     width: 152px;
   }
 }

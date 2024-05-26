@@ -102,6 +102,19 @@ const api = {
       console.error(err);
     }
   },
+  getUserInfo: async () => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/users/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`There was a problem with the request`);
+    }
+    return await response.json();
+  },
 };
 
 module.exports = api;
