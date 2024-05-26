@@ -10,16 +10,12 @@
   width: 100%;
 }
 
-@media screen and (max-width: 768px) {
-  .navigator {
-    height: 66px;
-  }
-}
-
-@media screen and (max-width: 679px) {
-  .navigator {
-    height: 56px;
-  }
+.navigator__title {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto Slab";
+  font-weight: 700;
+  grid-area: title;
 }
 
 .navigator__button {
@@ -52,12 +48,6 @@
   grid-template-rows: auto;
   grid-template-columns: 40px 1fr auto 40px;
   grid-template-areas: ". title menu .";
-}
-
-@media screen and (max-width: 400px) {
-  .navigator__container {
-    grid-template-columns: 16px 1fr auto 16px;
-  }
 }
 
 .navigator__divider {
@@ -109,16 +99,11 @@
   height: 100%;
 }
 
-@media screen and (max-width: 768px) {
-  .navigator__menu {
-    column-gap: 19px;
-  }
-}
-
-@media screen and (max-width: 679px) {
-  .navigator__menu {
-    display: none;
-  }
+.navigator__menu-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  column-gap: 16px;
 }
 
 .navigator__menu-button {
@@ -127,21 +112,73 @@
   border: 0;
   width: 24px;
   height: 24px;
+  background-color: transparent;
   background-image: url("../../images/menu.svg");
   display: none;
 }
 
+@media screen and (max-width: 768px) {
+  .navigator {
+    height: 66px;
+  }
+  .navigator__menu {
+    column-gap: 19px;
+  }
+}
+
 @media screen and (max-width: 679px) {
+  .navigator {
+    height: 56px;
+  }
+  .navigator__container {
+    grid-template-rows: 58px min-content;
+    grid-template-columns: 40px 1fr auto 40px;
+    grid-template-areas:
+      ". title menu ."
+      "options  options options options";
+  }
+  .navigator__menu {
+    display: flex;
+    flex-direction: row;
+    background-color: #1a1b22;
+    width: 100%;
+    grid-area: options;
+    z-index: 1;
+    border-radius: 20px;
+  }
+  .navigator__menu-container {
+    width: 100%;
+    margin: 15.81px 16px 24.55px;
+    display: flex;
+    flex-direction: column;
+  }
+  .navigator__button {
+    width: 100%;
+  }
+  .navigator__links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navigator__link {
+    font-size: 18px;
+    line-height: 3.11;
+  }
+  .navigator__link:hover {
+    border: none;
+  }
+
   .navigator__menu-button {
     display: inline;
     grid-area: menu;
   }
+  .navigator__menu_status_closed {
+    display: none;
+  }
 }
 
-.navigator__title {
-  margin: 0;
-  padding: 0;
-  font-family: "Roboto Slab";
-  font-weight: 700;
-  grid-area: title;
+@media screen and (max-width: 400px) {
+  .navigator__container {
+    grid-template-columns: 16px 1fr auto 16px;
+  }
 }
