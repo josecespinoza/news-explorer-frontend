@@ -26,14 +26,13 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
     <>
       <nav className="navigator">
         <section className="navigator__container">
-          <h2 className="navigator__title">NewsExplorer</h2>
           <button
             className="button navigator__menu-button"
             onClick={handleMenuMobileClick}
           ></button>
           <section
             className={`navigator__menu${
-              !isMenuMobileOpen ? "" : " navigator__menu_status_closed"
+              !isMenuMobileOpen ? " navigator__menu_status_closed" : ""
             }`}
           >
             <section className="navigator__menu-container">
@@ -77,7 +76,6 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
             </section>
           </section>
         </section>
-        <div className="navigator__divider"></div>
       </nav>
     </>
   );

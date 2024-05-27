@@ -10,10 +10,6 @@
 @import url("./blocks/button/__icon-container/button__icon-container.css");
 @import url("./blocks/button/__text/button__text.css");
 @import url("./blocks/link-button/link-button.css");
-@import url("./blocks/searchbar/searchbar.css");
-@import url("./blocks/header/__searchbar/header__searchbar.css");
-@import url("./blocks/searchbar/__term/searchbar__term.css");
-@import url("./blocks/searchbar/__button/searchbar__button.css");
 @import url("./blocks/about-author/about-author.css");
 @import url("./blocks/page/__about-author/page__about-author.css");
 @import url("./blocks/about-author/__photo-container/about-author__photo-container.css");
