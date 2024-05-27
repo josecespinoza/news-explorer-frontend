@@ -33,8 +33,8 @@ function Header({
 
   return (
     <header className={`header${theme ? ` header__theme_${theme}` : ""}`}>
-      <section className="header__top-bar-container">
-        <section className="header__top-bar">
+      <section className="header__top-bar">
+        <section className="header__top-bar-container">
           <h2 className="header__sitename">NewsExplorer</h2>
           <Navigation
             onSignInClick={handleSignInClick}

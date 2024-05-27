@@ -14,14 +14,14 @@
     "content";
 }
 
-.header__top-bar-container {
+.header__top-bar {
   width: 100%;
+  grid-area: top-bar;
 }
 
-.header__top-bar {
+.header__top-bar-container {
   display: flex;
   flex-direction: row;
-  grid-area: top-bar;
   align-items: center;
   justify-content: space-between;
   padding: 0 104px;
@@ -108,11 +108,11 @@
     font-size: 50px;
     line-height: 55px;
   }
-  .header__top-bar-container {
+  .header__top-bar {
     display: flex;
     flex-wrap: wrap;
   }
-  .header__top-bar {
+  .header__top-bar-container {
     padding: 0 40px;
     margin: 0;
     position: relative;
@@ -143,7 +143,7 @@
   .header__titles {
     width: 90%;
   }
-  .header__top-bar {
+  .header__top-bar-container {
     padding: 0 16px;
   }
 }
