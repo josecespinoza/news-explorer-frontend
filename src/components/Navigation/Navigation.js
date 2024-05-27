@@ -1,12 +1,23 @@
 import { Link } from "react-router-dom";
 import signOutIcon from "../../images/signout.svg";
-import signOutIconLight from "../../images/signoutight.svg";
+import signOutIconLight from "../../images/signoutlight.svg";
 import "./Navigation.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import { capitalize } from "../../utils/utils";
+import menuButton from "../../images/menu.svg";
+import menuButtonLight from "../../images/menulight.svg";
+import closeButton from "../../images/close.svg";
+import closeButtonLight from "../../images/closelight.svg";
+import { useLocation } from "react-router-dom";
 
 function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsMenuMobileOpen(false);
+  }, [location]);
+
   const userInfo = useContext(UserContext);
   const [isMenuMobileOpen, setIsMenuMobileOpen] = useState(false);
 
@@ -29,11 +40,28 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
           <button
             className="button navigator__menu-button"
             onClick={handleMenuMobileClick}
-          ></button>
+          >
+            <div className="button__content">
+              {!isMenuMobileOpen && (
+                <img
+                  className="button__icon button__icon_location_card"
+                  alt="menu icon"
+                  src={theme === "light" ? menuButtonLight : menuButton}
+                ></img>
+              )}
+              {isMenuMobileOpen && (
+                <img
+                  className="button__icon button__icon_location_card"
+                  alt="close icon"
+                  src={theme === "light" ? closeButtonLight : closeButton}
+                ></img>
+              )}
+            </div>
+          </button>
           <section
             className={`navigator__menu${
               !isMenuMobileOpen ? " navigator__menu_status_closed" : ""
-            }`}
+            }${theme === "light" ? " navigator__menu_theme_light" : ""}`}
           >
             <section className="navigator__menu-container">
               <section className="navigator__links">
