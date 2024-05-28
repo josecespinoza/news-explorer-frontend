@@ -12,8 +12,7 @@
 .navigator__button {
   background: none;
   border: 1px white solid;
-  padding-left: 33px;
-  padding-right: 33px;
+  padding: 11px 33px;
   font-size: 18px;
   align-self: center;
 }
@@ -91,6 +90,7 @@
   padding: 0;
   border: 0;
   width: 24px;
+  height: 24px;
   background-color: transparent;
   display: none;
 }
@@ -139,6 +139,7 @@
     column-gap: 16px;
   }
   .navigator__button {
+    height: 55.85px;
     width: 100%;
     padding-top: 14.96px;
     padding-bottom: 14.96px;

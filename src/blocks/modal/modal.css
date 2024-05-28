@@ -13,7 +13,19 @@
   grid-template-rows: 1fr min-content 1fr;
   grid-template-columns: 1fr min-content 1fr;
   grid-template-areas:
-    ". . ."
+    ". . closeButton"
     ". content ."
     ". . .";
+}
+
+@media screen and (max-width: 550px) {
+  .modal {
+    grid-template-rows: min-content 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "closeButton"
+      "content"
+      ".";
+    align-items: stretch;
+  }
 }

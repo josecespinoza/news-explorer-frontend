@@ -22,6 +22,7 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
   const [isMenuMobileOpen, setIsMenuMobileOpen] = useState(false);
 
   function handleSignInClick() {
+    setIsMenuMobileOpen(false);
     onSignInClick();
   }
 
@@ -44,14 +45,14 @@ function Navigation({ onSignInClick, onSignOutClick, isLoggedIn, theme = "" }) {
             <div className="button__content">
               {!isMenuMobileOpen && (
                 <img
-                  className="button__icon button__icon_location_card"
+                  className="button__icon"
                   alt="menu icon"
                   src={theme === "light" ? menuButtonLight : menuButton}
                 ></img>
               )}
               {isMenuMobileOpen && (
                 <img
-                  className="button__icon button__icon_location_card"
+                  className="button__icon"
                   alt="close icon"
                   src={theme === "light" ? closeButtonLight : closeButton}
                 ></img>

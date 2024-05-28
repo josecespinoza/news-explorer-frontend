@@ -1,0 +1,13 @@
+.modal__close-button {
+  margin-left: 6px;
+  margin-bottom: 6px;
+}
+
+@media screen and (max-width: 550px) {
+  .modal__close-button {
+    margin: 16px 0px;
+    margin-right: 16px;
+    width: 24px;
+    height: 24px;
+  }
+}
