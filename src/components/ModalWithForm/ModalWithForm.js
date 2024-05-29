@@ -43,11 +43,12 @@ function ModalWithForm({
       <section className="modal">
         <div className="modal__backdrop" onClick={handleClose}></div>
         <div className="modal__close">
-          <IconButton
-            onClick={handleClose}
-            iconPath={closeButton}
-            customClassName="modal__close-button"
-          ></IconButton>
+          <div className="modal__close-container">
+            <IconButton
+              onClick={handleClose}
+              iconPath={closeButton}
+            ></IconButton>
+          </div>
         </div>
         <section className="modal__content">
           <h3 className="modal__title">{title}</h3>
