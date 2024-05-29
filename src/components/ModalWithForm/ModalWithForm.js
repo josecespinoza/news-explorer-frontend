@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./ModalWithForm.css";
 import IconButton from "../IconButton/IconButton";
 import closeButton from "../../images/close.svg";
@@ -24,7 +24,16 @@ function ModalWithForm({
 }) {
   const [isOpen, setIsOpen] = useState(true);
 
-  function handleClose() {
+  const modalRef = useRef();
+
+  useEffect(() => {
+    modalRef.current.focus();
+  }, []);
+
+  function handleClose(evt) {
+    if (!isCloseEvent(evt)) {
+      return;
+    }
     setIsOpen(false);
     onClose();
   }
@@ -38,9 +47,20 @@ function ModalWithForm({
     onSubmit();
   }
 
+  function isCloseEvent(evt) {
+    return (
+      evt.key?.toLowerCase() === "escape" || evt.type.toLowerCase() === "click"
+    );
+  }
+
   return (
     isOpen && (
-      <section className="modal">
+      <section
+        ref={modalRef}
+        tabIndex="1"
+        onKeyUp={handleClose}
+        className="modal"
+      >
         <div className="modal__backdrop" onClick={handleClose}></div>
         <div className="modal__close">
           <div className="modal__close-container">
