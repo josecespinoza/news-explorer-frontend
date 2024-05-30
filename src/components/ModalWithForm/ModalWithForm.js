@@ -23,6 +23,7 @@ function ModalWithForm({
   onClose,
 }) {
   const [isOpen, setIsOpen] = useState(true);
+  const [isToogling, setIsToogling] = useState(true);
 
   const modalRef = useRef();
 
@@ -30,12 +31,18 @@ function ModalWithForm({
     modalRef.current.focus();
   }, []);
 
-  function handleClose(evt) {
+  function handleAnimationEnd(evt) {
+    if (evt.animationName === "fadeOut") {
+      setIsOpen(false);
+      onClose(evt);
+    }
+  }
+
+  function toogleModal(evt) {
     if (!isCloseEvent(evt)) {
       return;
     }
-    setIsOpen(false);
-    onClose();
+    setIsToogling(false);
   }
 
   function handleChange(evt) {
@@ -58,14 +65,17 @@ function ModalWithForm({
       <section
         ref={modalRef}
         tabIndex="1"
-        onKeyUp={handleClose}
-        className="modal"
+        onKeyUp={toogleModal}
+        className={`modal ${
+          isToogling ? "modal_state_open" : "modal_state_close"
+        }`}
+        onAnimationEnd={handleAnimationEnd}
       >
-        <div className="modal__backdrop" onClick={handleClose}></div>
-        <div className="modal__close">
+        <div className="modal__backdrop" onClick={toogleModal}></div>
+        <div className="modal__close" onClick={toogleModal}>
           <div className="modal__close-container">
             <IconButton
-              onClick={handleClose}
+              onClick={toogleModal}
               iconPath={closeButton}
             ></IconButton>
           </div>

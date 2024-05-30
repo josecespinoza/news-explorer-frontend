@@ -1,8 +1,8 @@
 import "./IconButton.css";
 
 function IconButton({ onClick, iconPath, customClassName }) {
-  function handleClick(c) {
-    onClick(onClick);
+  function handleClick(evt) {
+    onClick(evt);
   }
 
   return (
