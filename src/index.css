@@ -35,4 +35,6 @@
 @import url("./blocks/modal/__close/modal__close.css");
 @import url("./blocks/modal/__close-container/modal__close-container.css");
 @import url("./blocks/modal/__content/modal__content.css");
+@import url("./blocks/modal/__content/_state/modal__content_state_open.css");
+@import url("./blocks/modal/__content/_state/modal__content_state_close.css");
 @import url("./blocks/modal/__title/modal__title.css");

@@ -80,7 +80,13 @@ function ModalWithForm({
             ></IconButton>
           </div>
         </div>
-        <section className="modal__content">
+        <section
+          className={`modal__content ${
+            isToogling
+              ? "modal__content_state_open"
+              : "modal__content_state_close"
+          }`}
+        >
           <h3 className="modal__title">{title}</h3>
           <form className="modal-form" onSubmit={handleSubmit}>
             <section className="modal-form__inputs">
