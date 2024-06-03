@@ -1,0 +1,31 @@
+.icon-button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-family: Roboto;
+  font-weight: 500;
+  color: inherit;
+  border-radius: 30px;
+  width: auto;
+  line-height: 24px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.icon-button__content {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-button__icon {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}

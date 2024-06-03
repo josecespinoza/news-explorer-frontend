@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./ModalWithForm.css";
+import IconButton from "../IconButton/IconButton";
+import closeButton from "../../images/close.svg";
 
 /**
  *
@@ -21,10 +23,26 @@ function ModalWithForm({
   onClose,
 }) {
   const [isOpen, setIsOpen] = useState(true);
+  const [isToogling, setIsToogling] = useState(true);
 
-  function handleClose() {
-    setIsOpen(false);
-    onClose();
+  const modalRef = useRef();
+
+  useEffect(() => {
+    modalRef.current.focus();
+  }, []);
+
+  function handleAnimationEnd(evt) {
+    if (evt.animationName === "fadeOut") {
+      setIsOpen(false);
+      onClose(evt);
+    }
+  }
+
+  function toogleModal(evt) {
+    if (!isCloseEvent(evt)) {
+      return;
+    }
+    setIsToogling(false);
   }
 
   function handleChange(evt) {
@@ -36,12 +54,39 @@ function ModalWithForm({
     onSubmit();
   }
 
+  function isCloseEvent(evt) {
+    return (
+      evt.key?.toLowerCase() === "escape" || evt.type.toLowerCase() === "click"
+    );
+  }
+
   return (
     isOpen && (
-      <section className="modal">
-        <div className="modal__backdrop" onClick={handleClose}></div>
-        <div className="modal__close"></div>
-        <section className="modal__content">
+      <section
+        ref={modalRef}
+        tabIndex="1"
+        onKeyUp={toogleModal}
+        className={`modal ${
+          isToogling ? "modal_state_open" : "modal_state_close"
+        }`}
+        onAnimationEnd={handleAnimationEnd}
+      >
+        <div className="modal__backdrop" onClick={toogleModal}></div>
+        <div className="modal__close" onClick={toogleModal}>
+          <div className="modal__close-container">
+            <IconButton
+              onClick={toogleModal}
+              iconPath={closeButton}
+            ></IconButton>
+          </div>
+        </div>
+        <section
+          className={`modal__content ${
+            isToogling
+              ? "modal__content_state_open"
+              : "modal__content_state_close"
+          }`}
+        >
           <h3 className="modal__title">{title}</h3>
           <form className="modal-form" onSubmit={handleSubmit}>
             <section className="modal-form__inputs">
@@ -65,7 +110,7 @@ function ModalWithForm({
                 })}
             </section>
             <button
-              className={`button modal__button modal__button_status_${
+              className={`button modal-form__button modal-form__button_status_${
                 isFormValid ? "active" : "inactive"
               }`}
             >

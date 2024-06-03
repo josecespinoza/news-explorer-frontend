@@ -62,7 +62,7 @@ function NewsCard({
             <div className="button__content">
               <div className="button__icon-container">
                 <img
-                  className="button__icon button__icon_location_card"
+                  className="button__icon"
                   alt="bookmark icon"
                   src={isBookmarked ? bookmarked : unbookmarked}
                 ></img>
@@ -87,7 +87,7 @@ function NewsCard({
               <div className="button__content">
                 <div className="button__icon-container">
                   <img
-                    className="button__icon button__icon_location_card"
+                    className="button__icon"
                     alt="trash icon"
                     src={trash}
                   ></img>

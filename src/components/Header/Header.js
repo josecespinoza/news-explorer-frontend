@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navigation from "../Navigation/Navigation";
 import { useLocation } from "react-router-dom";
+import SearchForm from "../SearchForm/SearchForm";
 import "./Header.css";
 
 function Header({
@@ -32,12 +33,18 @@ function Header({
 
   return (
     <header className={`header${theme ? ` header__theme_${theme}` : ""}`}>
-      <Navigation
-        onSignInClick={handleSignInClick}
-        onSignOutClick={handleSignOutClick}
-        isLoggedIn={isLoggedIn}
-        theme={theme && theme}
-      ></Navigation>
+      <section className="header__top-bar">
+        <section className="header__top-bar-container">
+          <h2 className="header__sitename">NewsExplorer</h2>
+          <Navigation
+            onSignInClick={handleSignInClick}
+            onSignOutClick={handleSignOutClick}
+            isLoggedIn={isLoggedIn}
+            theme={theme && theme}
+          ></Navigation>
+        </section>
+        <div className="header__top-bar-divider"></div>
+      </section>
       {location.pathname === "/" && (
         <section className="header__content">
           <section className="header__titles">
@@ -49,15 +56,13 @@ function Header({
             </h3>
           </section>
 
-          <form className="searchbar header__searchbar" onSubmit={handleSearch}>
-            <input
-              className="searchbar__term"
-              type="text"
-              placeholder="Introduce un tema"
-              onChange={handleChange}
-            ></input>
-            <button className="button searchbar__button">Buscar</button>
-          </form>
+          <SearchForm
+            buttonLabel="Buscar"
+            onChange={handleChange}
+            onSearch={handleSearch}
+            placeholder="Introduce un tema"
+            customClassName="header__searchbar"
+          ></SearchForm>
         </section>
       )}
     </header>
