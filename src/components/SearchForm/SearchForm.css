@@ -11,26 +11,23 @@
   grid-template-areas: ". term . button";
 }
 
-@media screen and (max-width: 768px) {
-  .searchbar {
-    grid-template-columns: 24px auto 40px 160px;
-    width: 452px;
-    height: 56px;
-  }
+.searchbar__button {
+  background-color: #2f71e5;
+  border: 0;
+  font-size: 18px;
+  width: 100%;
+  padding: 0;
+  grid-area: button;
 }
 
-@media screen and (max-width: 500px) {
-  .searchbar {
-    width: 80%;
-    border-radius: 0;
-    background-color: transparent;
-    row-gap: 16px;
-    grid-template-columns: auto;
-    grid-template-rows: 56px 56px;
-    grid-template-areas:
-      "term"
-      "button";
-  }
+.searchbar__button:hover {
+  background-color: #347eff;
+  transition: background-color 0.5s;
+}
+
+.searchbar__button:active {
+  background-color: #2a65cc;
+  transition: none;
 }
 
 .searchbar__term {
@@ -58,7 +55,26 @@
   outline: none;
 }
 
+@media screen and (max-width: 768px) {
+  .searchbar {
+    grid-template-columns: 24px auto 40px 160px;
+    width: 452px;
+    height: 56px;
+  }
+}
+
 @media screen and (max-width: 500px) {
+  .searchbar {
+    width: 80%;
+    border-radius: 0;
+    background-color: transparent;
+    row-gap: 16px;
+    grid-template-columns: auto;
+    grid-template-rows: 56px 56px;
+    grid-template-areas:
+      "term"
+      "button";
+  }
   .searchbar__term {
     background-color: #fff;
     border-radius: 50px;
@@ -66,13 +82,4 @@
     width: calc(100% - 32px);
     height: calc(100% - 32px);
   }
-}
-
-.searchbar__button {
-  background-color: #2f71e5;
-  border: 0;
-  font-size: 18px;
-  width: 100%;
-  padding: 0;
-  grid-area: button;
 }
