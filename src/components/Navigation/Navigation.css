@@ -109,6 +109,23 @@
   }
 }
 
+@keyframes DragDown {
+  from {
+    translate: 0 -100%;
+  }
+  to {
+    translate: 0 0%;
+  }
+}
+@keyframes DragUp {
+  from {
+    translate: 0 0%;
+  }
+  to {
+    translate: 0 -100%;
+  }
+}
+
 @media screen and (max-width: 679px) {
   .navigator {
     height: 56px;
@@ -126,6 +143,11 @@
     top: 0;
     height: auto;
     padding-top: 56px;
+    overflow: hidden;
+    animation: DragDown 0.3s forwards;
+  }
+  .navigator__menu_status_closed {
+    animation: DragUp 0.3s forwards;
   }
   .navigator__menu_theme_light {
     background-color: #ffffff;
@@ -162,9 +184,6 @@
   .navigator__menu-button {
     display: inline;
     grid-area: menu;
-  }
-  .navigator__menu_status_closed {
-    display: none;
   }
 }
 
