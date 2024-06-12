@@ -17,6 +17,7 @@ function ModalWithForm({
   title,
   buttonLabel,
   inputs,
+  errors,
   isFormValid,
   onChange,
   onSubmit,
@@ -51,6 +52,9 @@ function ModalWithForm({
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (!isFormValid) {
+      return;
+    }
     onSubmit();
   }
 
@@ -58,6 +62,14 @@ function ModalWithForm({
     return (
       evt.key?.toLowerCase() === "escape" || evt.type.toLowerCase() === "click"
     );
+  }
+
+  function calculateError(inputName) {
+    if (!errors) {
+      return;
+    }
+
+    return errors[`${inputName}Error`] ? errors[`${inputName}Error`] : "";
   }
 
   return (
@@ -105,6 +117,9 @@ function ModalWithForm({
                         required={input.required}
                         onChange={handleChange}
                       />
+                      <p className="modal-form__error">
+                        {calculateError(input.name)}
+                      </p>
                     </div>
                   );
                 })}

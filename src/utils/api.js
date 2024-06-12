@@ -29,6 +29,9 @@ const api = {
           password,
         }),
       });
+      if (!response.ok) {
+        throw new Error(`There was a problem with the request`);
+      }
       return await response.json();
     } catch (err) {
       console.error(err);

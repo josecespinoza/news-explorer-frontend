@@ -3,19 +3,47 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./SignInModalForm.css";
 import api from "../../utils/api";
 import ModalWithMessage from "../ModalWithMessage/ModalWithMessage";
+import * as yup from "yup";
 
 function SignInModalForm({ onClose, onSignIn }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [signinData, setSigninData] = useState({ email: null, password: null });
+  const [signupData, setSignupData] = useState({
+    email: null,
+    password: null,
+    username: null,
+  });
+  /**Contains an object of one or more errors with the format {inputError: errorMessage}
+   *e.g. {emailError: "This email is invalid", passwordError: "Please add a password"}
+   */
+  const [formErrors, setFormErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(true);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [isSignUpSuccess, setIsSignUpSuccess] = useState(false);
 
   useEffect(() => {
-    handleValidation();
-  }, [email, password, username]);
+    Object.keys(formErrors).length > 0 &&
+      setIsFormValid(
+        Object.values(formErrors).every((formError) => formError === null)
+      );
+  }, [formErrors]);
+
+  const signInSchema = yup.object({
+    email: yup
+      .string()
+      .email("Dirección de correo electrónico no válida")
+      .required("Debe ingresar un correo electrónico válido"),
+    password: yup.string().required("Debe ingresar un password"),
+  });
+
+  const signUpSchema = yup.object({
+    email: yup
+      .string()
+      .email("Dirección de correo electrónico no válida")
+      .required("Debe ingresar un correo electrónico válido"),
+    password: yup.string().required("Debe ingresar un password"),
+    username: yup.string().required("Debe ingresar un nombre de usuario"),
+  });
 
   const signInInputs = [
     {
@@ -60,7 +88,7 @@ function SignInModalForm({ onClose, onSignIn }) {
 
   async function handleSignIn() {
     try {
-      const response = await api.signin(email, password);
+      const response = await api.signin(signinData.email, signinData.password);
       const token = response.token;
       token && localStorage.setItem("token", token);
       onSignIn();
@@ -71,7 +99,11 @@ function SignInModalForm({ onClose, onSignIn }) {
 
   async function handleSignUp() {
     try {
-      await api.signup(email, password, username);
+      await api.signup(
+        signupData.email,
+        signupData.password,
+        signupData.username
+      );
       setIsSignUpOpen(false);
       setIsSignUpSuccess(true);
     } catch (err) {
@@ -80,21 +112,40 @@ function SignInModalForm({ onClose, onSignIn }) {
   }
 
   function handleClose() {
-    /* setIsSignInOpen(true);
-    setIsSignUpOpen(false);
-    setIsSignUpSuccess(false); */
     onClose();
   }
 
-  function handleValidation() {
-    //TODO Form validation
-    setIsFormValid(true);
+  async function isInputValid(input, schema) {
+    try {
+      const validate = await schema.validateAt(input.name, {
+        [input.name]: input.value,
+      });
+      setFormErrors({
+        ...formErrors,
+        [`${input.name}Error`]: null,
+      });
+      return true;
+    } catch (error) {
+      if (error instanceof yup.ValidationError) {
+        setFormErrors({
+          ...formErrors,
+          [`${input.name}Error`]: error.message,
+        });
+        return false;
+      }
+    }
   }
 
-  function handleChange(input) {
-    input.name === "email" && setEmail(input.value);
-    input.name === "password" && setPassword(input.value);
-    input.name === "username" && setUsername(input.value);
+  async function handleChangeSignin(input) {
+    if (await isInputValid(input, signInSchema)) {
+      setSigninData({ ...signinData, [input.name]: input.value });
+    }
+  }
+
+  async function handleChangeSignup(input) {
+    if (await isInputValid(input, signUpSchema)) {
+      setSignupData({ ...signupData, [input.name]: input.value });
+    }
   }
 
   function handleSignInLinkClick(evt) {
@@ -116,10 +167,11 @@ function SignInModalForm({ onClose, onSignIn }) {
           title="Iniciar sesión"
           buttonLabel="Iniciar sesión"
           inputs={signInInputs}
+          errors={formErrors}
           isFormValid={isFormValid}
           onSubmit={handleSignIn}
           onClose={handleClose}
-          onChange={handleChange}
+          onChange={handleChangeSignin}
         >
           <span className="signin__text">
             o{" "}
@@ -137,10 +189,11 @@ function SignInModalForm({ onClose, onSignIn }) {
           title="Inscribirse"
           buttonLabel="Inscribirse"
           inputs={signUpInputs}
+          errors={formErrors}
           isFormValid={isFormValid}
           onSubmit={handleSignUp}
           onClose={handleClose}
-          onChange={handleChange}
+          onChange={handleChangeSignup}
         >
           <span className="signin__text">
             o{" "}
