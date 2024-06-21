@@ -15,7 +15,6 @@ function Main({
 }) {
   async function saveCard(card) {
     try {
-      //TODO: Track searched keyword
       const response = await api.saveArticle(card);
       const savedArticle = response.article;
       onCardBookmark(savedArticle, true);
@@ -33,7 +32,9 @@ function Main({
   }
 
   function isBookmarked(card) {
-    return savedCards.some((savedCard) => savedCard.url === card.url);
+    return savedCards.some((savedCard) => {
+      return savedCard && savedCard.url === card.url;
+    });
   }
 
   async function handleCardBookmark(card) {

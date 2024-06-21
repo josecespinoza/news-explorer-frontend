@@ -112,6 +112,9 @@ const api = {
           }),
         }
       );
+      if (!response.ok) {
+        return Promise.reject(new Error(`No fue posible guardar la noticia`));
+      }
       return await response.json();
     } catch (err) {
       console.error(err);
