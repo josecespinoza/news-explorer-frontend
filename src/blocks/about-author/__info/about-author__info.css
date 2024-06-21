@@ -1,8 +1,0 @@
-.about-author__info {
-  grid-area: info;
-  display: flex;
-  flex-direction: column;
-  row-gap: 24px;
-  max-width: 600px;
-  margin-top: 51px;
-}

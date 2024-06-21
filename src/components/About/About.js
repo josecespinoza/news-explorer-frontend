@@ -1,4 +1,5 @@
-import author from "../images/author.jpg";
+import author from "../../images/author.jpg";
+import "./About.css";
 
 function About() {
   return (
@@ -12,12 +13,15 @@ function About() {
         <h2 className="about-author__title">Acerca del autor</h2>
         <section className="about-author__description">
           <p className="about-author__paragraph">
-            Este bloque describe al autor del proyecto. Aquí debe indicar tu
-            nombre, a qué te dedicas y qué tecnologías de desarrollo conoces.
+            Me llamo José Espinoza, actualmente soy líder de tecnología y estoy
+            actualizando mis conocimientos técnicos. He trabajado con distintas
+            tecnologías como JavaScript, React y NodeJS utilizando programación
+            orientada a objetos.
           </p>
           <p className="about-author__paragraph">
-            También puedes hablar de tu experiencia con Practicum, de lo que
-            aprendiste allí y de cómo puedes ayudar a los clientes potenciales.
+            Como líder de tecnología necesito mantenerme actualizado, y el
+            bootcamp de tripleten ha sido clave para mi desarrollo profesional,
+            ya que me ha brindado una actualización rápida y eficaz.
           </p>
         </section>
       </section>

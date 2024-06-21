@@ -48,6 +48,11 @@
   grid-area: title;
 }
 
+.header__sitename-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header__theme_light {
   background-image: none;
   background-color: #fff;

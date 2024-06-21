@@ -3,6 +3,7 @@ import Navigation from "../Navigation/Navigation";
 import { useLocation } from "react-router-dom";
 import SearchForm from "../SearchForm/SearchForm";
 import "./Header.css";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function Header({
   onSearch,
@@ -35,7 +36,9 @@ function Header({
     <header className={`header${theme ? ` header__theme_${theme}` : ""}`}>
       <section className="header__top-bar">
         <section className="header__top-bar-container">
-          <h2 className="header__sitename">NewsExplorer</h2>
+          <Link to="/" className="header__sitename-link">
+            <h2 className="header__sitename">NewsExplorer</h2>
+          </Link>
           <Navigation
             onSignInClick={handleSignInClick}
             onSignOutClick={handleSignOutClick}

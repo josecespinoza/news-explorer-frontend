@@ -1,8 +1,21 @@
+const getFromDate = () => {
+  const date = new Date();
+  date.setDate(date.getDate() - process.env.REACT_APP_NEWS_SEARCHTIME_IN_DAYS);
+  const fromDate = `${date.getFullYear()}-${
+    date.getMonth() + 1
+  }-${date.getDate()}`;
+  return fromDate;
+};
+
 const newsApi = {
   getNews: async (searchTerm, page = 1) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_NEWSAPI_URL}?q=${searchTerm}&from=2024-04-30&to=2024-05-07&pageSize=${process.env.REACT_APP_NEWS_PAGE_SIZE}&page=${page}`,
+        `${
+          process.env.REACT_APP_NEWSAPI_URL
+        }?q=${searchTerm}&from=${getFromDate()}&pageSize=${
+          process.env.REACT_APP_NEWS_PAGE_SIZE
+        }&page=${page}`,
         {
           method: "GET",
           headers: {

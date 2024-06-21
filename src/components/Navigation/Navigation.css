@@ -25,7 +25,13 @@
 
 .navigator__button_theme_light {
   background: none;
+  border: 1px #d1d2d6 solid;
+}
+
+.navigator__button_theme_light:hover {
+  background: none;
   border: 1px #1a1b22 solid;
+  transition: border 0.5s;
 }
 
 .navigator__container {
@@ -58,6 +64,7 @@
 .navigator__link:hover {
   border-bottom: 3px solid;
   color: inherit;
+  transition: border 0.1s;
 }
 
 .navigator__links {

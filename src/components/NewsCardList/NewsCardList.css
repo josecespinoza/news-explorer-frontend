@@ -57,10 +57,20 @@
 }
 
 .news__button {
-  background-color: #e8e8e8;
+  background-color: #fff;
   width: 288px;
   height: 64px;
   font-size: 18px;
+}
+
+.news__button:active {
+  background-color: #e8e8e8;
+  transition: none;
+}
+
+.news__button:hover {
+  background-color: #e8e8e8;
+  transition: background-color 0.5s;
 }
 
 .news__description {

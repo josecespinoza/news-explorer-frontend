@@ -17,6 +17,8 @@ function ModalWithForm({
   title,
   buttonLabel,
   inputs,
+  errors,
+  submitError,
   isFormValid,
   onChange,
   onSubmit,
@@ -51,6 +53,9 @@ function ModalWithForm({
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (!isFormValid) {
+      return;
+    }
     onSubmit();
   }
 
@@ -58,6 +63,14 @@ function ModalWithForm({
     return (
       evt.key?.toLowerCase() === "escape" || evt.type.toLowerCase() === "click"
     );
+  }
+
+  function calculateError(inputName) {
+    if (!errors) {
+      return;
+    }
+
+    return errors[`${inputName}Error`] ? errors[`${inputName}Error`] : "";
   }
 
   return (
@@ -105,10 +118,16 @@ function ModalWithForm({
                         required={input.required}
                         onChange={handleChange}
                       />
+                      <p className="modal-form__error">
+                        {calculateError(input.name)}
+                      </p>
                     </div>
                   );
                 })}
             </section>
+            <p className="modal-form__error modal-form__error_position_center">
+              {submitError}
+            </p>
             <button
               className={`button modal-form__button modal-form__button_status_${
                 isFormValid ? "active" : "inactive"
