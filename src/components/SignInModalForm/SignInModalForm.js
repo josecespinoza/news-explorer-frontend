@@ -16,6 +16,7 @@ function SignInModalForm({ onClose, onSignIn }) {
    *e.g. {emailError: "This email is invalid", passwordError: "Please add a password"}
    */
   const [formErrors, setFormErrors] = useState({});
+  const [submitError, setSubmitError] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(true);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -93,7 +94,7 @@ function SignInModalForm({ onClose, onSignIn }) {
       token && localStorage.setItem("token", token);
       onSignIn();
     } catch (err) {
-      console.log(err);
+      setSubmitError(err.message);
     }
   }
 
@@ -107,7 +108,7 @@ function SignInModalForm({ onClose, onSignIn }) {
       setIsSignUpOpen(false);
       setIsSignUpSuccess(true);
     } catch (err) {
-      console.log(err);
+      setSubmitError(err.message);
     }
   }
 
@@ -117,7 +118,7 @@ function SignInModalForm({ onClose, onSignIn }) {
 
   async function isInputValid(input, schema) {
     try {
-      const validate = await schema.validateAt(input.name, {
+      await schema.validateAt(input.name, {
         [input.name]: input.value,
       });
       setFormErrors({
@@ -137,12 +138,14 @@ function SignInModalForm({ onClose, onSignIn }) {
   }
 
   async function handleChangeSignin(input) {
+    setSubmitError("");
     if (await isInputValid(input, signInSchema)) {
       setSigninData({ ...signinData, [input.name]: input.value });
     }
   }
 
   async function handleChangeSignup(input) {
+    setSubmitError("");
     if (await isInputValid(input, signUpSchema)) {
       setSignupData({ ...signupData, [input.name]: input.value });
     }
@@ -152,12 +155,14 @@ function SignInModalForm({ onClose, onSignIn }) {
     evt.preventDefault();
     setIsSignInOpen(true);
     setIsSignUpOpen(false);
+    setSubmitError("");
   }
 
   function handleSignUpLinkClick(evt) {
     evt.preventDefault();
     setIsSignInOpen(false);
     setIsSignUpOpen(true);
+    setSubmitError("");
   }
 
   return (
@@ -168,6 +173,7 @@ function SignInModalForm({ onClose, onSignIn }) {
           buttonLabel="Iniciar sesión"
           inputs={signInInputs}
           errors={formErrors}
+          submitError={submitError}
           isFormValid={isFormValid}
           onSubmit={handleSignIn}
           onClose={handleClose}
@@ -190,6 +196,7 @@ function SignInModalForm({ onClose, onSignIn }) {
           buttonLabel="Inscribirse"
           inputs={signUpInputs}
           errors={formErrors}
+          submitError={submitError}
           isFormValid={isFormValid}
           onSubmit={handleSignUp}
           onClose={handleClose}

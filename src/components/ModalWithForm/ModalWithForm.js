@@ -18,6 +18,7 @@ function ModalWithForm({
   buttonLabel,
   inputs,
   errors,
+  submitError,
   isFormValid,
   onChange,
   onSubmit,
@@ -124,6 +125,9 @@ function ModalWithForm({
                   );
                 })}
             </section>
+            <p className="modal-form__error modal-form__error_position_center">
+              {submitError}
+            </p>
             <button
               className={`button modal-form__button modal-form__button_status_${
                 isFormValid ? "active" : "inactive"

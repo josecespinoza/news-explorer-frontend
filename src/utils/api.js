@@ -12,6 +12,14 @@ const api = {
           username,
         }),
       });
+      if (!response.ok) {
+        const res = await response.json();
+        let errorMessage = `Ocurrió un error durante el registro, por favor intenta denuevo`;
+        if (res.errorCode === "USER_ALREADY_EXIST_ERROR") {
+          errorMessage = `Este correo electrónico no está disponible`;
+        }
+        return Promise.reject(new Error(errorMessage));
+      }
       return await response.json();
     } catch (err) {
       console.error(err);
@@ -30,7 +38,11 @@ const api = {
         }),
       });
       if (!response.ok) {
-        throw new Error(`There was a problem with the request`);
+        return Promise.reject(
+          new Error(
+            `No pudimos iniciar tu sesión, por favor revisa tus credenciales`
+          )
+        );
       }
       return await response.json();
     } catch (err) {

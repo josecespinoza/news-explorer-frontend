@@ -43,6 +43,11 @@
   line-height: 1.21;
   color: #ff0000;
   height: 14px;
+  width: 100%;
+}
+
+.modal-form__error_position_center {
+  text-align: center;
 }
 
 .modal-form__input::placeholder {
@@ -76,7 +81,7 @@
 
 .modal-form__button {
   border: none;
-  margin-top: 39px;
+  margin-top: 8px;
   margin-bottom: 16px;
   font-size: 18px;
   width: 100%;
