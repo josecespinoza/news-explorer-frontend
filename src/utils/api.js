@@ -15,7 +15,7 @@ const api = {
       if (!response.ok) {
         const res = await response.json();
         let errorMessage = `Ocurrió un error durante el registro, por favor intenta denuevo`;
-        if (res.errorCode === "USER_ALREADY_EXIST_ERROR") {
+        if (res.errorCode === "ALREADY_EXIST_ERROR") {
           errorMessage = `Este correo electrónico no está disponible`;
         }
         return Promise.reject(new Error(errorMessage));

@@ -101,7 +101,7 @@ function ModalWithForm({
           }`}
         >
           <h3 className="modal__title">{title}</h3>
-          <form className="modal-form" onSubmit={handleSubmit}>
+          <form className="modal-form" onSubmit={handleSubmit} noValidate>
             <section className="modal-form__inputs">
               {inputs &&
                 inputs.map((input, index) => {
