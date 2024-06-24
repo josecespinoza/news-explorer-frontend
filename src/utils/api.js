@@ -24,7 +24,9 @@ const api = {
       }
       return await response.json();
     } catch (err) {
-      console.error(err);
+      return Promise.reject(
+        new Error("Disculpanos, el registro no se encuentra disponible")
+      );
     }
   },
   signin: async (email, password) => {
@@ -48,7 +50,9 @@ const api = {
       }
       return await response.json();
     } catch (err) {
-      console.error(err);
+      return Promise.reject(
+        new Error("Disculpanos, el inicio de sesión no se encuentra disponible")
+      );
     }
   },
   getArticles: async () => {
@@ -62,7 +66,11 @@ const api = {
       });
       return await response.json();
     } catch (err) {
-      console.error(err);
+      return Promise.reject(
+        new Error(
+          "Disculpanos, no podemos obtener tus noticias en este momento"
+        )
+      );
     }
   },
   deleteArticle: async (articleId) => {
@@ -76,7 +84,11 @@ const api = {
       });
       return await response.json();
     } catch (err) {
-      console.error(err);
+      return Promise.reject(
+        new Error(
+          "Disculpanos, no podemos eliminar la noticia en estos momentos"
+        )
+      );
     }
   },
   saveArticle: async ({
@@ -110,21 +122,31 @@ const api = {
       }
       return await response.json();
     } catch (err) {
-      console.error(err);
+      return Promise.reject(
+        new Error("Disculpanos, no podemos guardar noticias en estos momentos")
+      );
     }
   },
   getUserInfo: async () => {
-    const response = await fetch(`${APP_API_URL}/users/me`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`There was a problem with the request`);
+    try {
+      const response = await fetch(`${APP_API_URL}/users/me`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`Ocurrió un error y no pudimos obtener tu información`);
+      }
+      return await response.json();
+    } catch (err) {
+      return Promise.reject(
+        new Error(
+          "Disculpanos, en estos momentos no podemos obtener tu información"
+        )
+      );
     }
-    return await response.json();
   },
 };
 

@@ -12,6 +12,7 @@ function Main({
   isSearchingMore,
   onClickViewMore,
   isLastPage,
+  onError,
 }) {
   async function saveCard(card) {
     try {
@@ -19,7 +20,7 @@ function Main({
       const savedArticle = response.article;
       onCardBookmark(savedArticle, true);
     } catch (err) {
-      console.log(err);
+      onError(err.message);
     }
   }
   async function deleteCard(card) {
@@ -27,7 +28,7 @@ function Main({
       await api.deleteArticle(card._id);
       onCardBookmark(card, false);
     } catch (err) {
-      console.log(err);
+      onError(err.message);
     }
   }
 

@@ -30,7 +30,11 @@ const newsApi = {
       );
       return response.ok && response.json();
     } catch (err) {
-      console.log(err);
+      return Promise.reject(
+        new Error(
+          "Ocurrió un error y no pudimos obtener las noticias, intentalo denuevo por favor"
+        )
+      );
     }
   },
 };
