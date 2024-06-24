@@ -15,6 +15,8 @@ import { Route } from "react-router-dom";
 import { Switch, useHistory, useLocation } from "react-router-dom";
 
 function App() {
+  const APP_NEWS_PAGE_SIZE = process.env.REACT_APP_NEWS_PAGE_SIZE || 3;
+
   const [articles, setArticles] = useState([]);
   const [savedArticles, setSavedArticles] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -55,9 +57,7 @@ function App() {
     try {
       const result = await newsApi.getNews(searchTerm);
       setCurrentPage(1);
-      setTotalPages(
-        Math.ceil(result.totalResults / process.env.REACT_APP_NEWS_PAGE_SIZE)
-      );
+      setTotalPages(Math.ceil(result.totalResults / APP_NEWS_PAGE_SIZE));
       setIsSearching(false);
       const normalizedArticles =
         result.articles.length <= 0

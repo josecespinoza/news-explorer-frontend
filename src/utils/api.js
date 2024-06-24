@@ -1,7 +1,9 @@
+const APP_API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
 const api = {
   signup: async (email, password, username) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
+      const response = await fetch(`${APP_API_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +29,7 @@ const api = {
   },
   signin: async (email, password) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/signin`, {
+      const response = await fetch(`${APP_API_URL}/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,16 +53,13 @@ const api = {
   },
   getArticles: async () => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/articles`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await fetch(`${APP_API_URL}/articles`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return await response.json();
     } catch (err) {
       console.error(err);
@@ -68,16 +67,13 @@ const api = {
   },
   deleteArticle: async (articleId) => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/articles/${articleId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await fetch(`${APP_API_URL}/articles/${articleId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return await response.json();
     } catch (err) {
       console.error(err);
@@ -93,25 +89,22 @@ const api = {
     photo,
   }) => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/articles`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({
-            keyword,
-            title,
-            description,
-            publishDate,
-            source,
-            url,
-            photo,
-          }),
-        }
-      );
+      const response = await fetch(`${APP_API_URL}/articles`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          keyword,
+          title,
+          description,
+          publishDate,
+          source,
+          url,
+          photo,
+        }),
+      });
       if (!response.ok) {
         return Promise.reject(new Error(`No fue posible guardar la noticia`));
       }
@@ -121,7 +114,7 @@ const api = {
     }
   },
   getUserInfo: async () => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/users/me`, {
+    const response = await fetch(`${APP_API_URL}/users/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
