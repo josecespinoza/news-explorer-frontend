@@ -30,7 +30,11 @@ function NewsCardList({
     <section className={getClassName()}>
       {!isSearching && cards.length === 0 && (
         <>
-          <img src={notFoundLogo} className="news__not-found-image"></img>
+          <img
+            src={notFoundLogo}
+            alt="Not found logo"
+            className="news__not-found-image"
+          ></img>
           <h3 className="news__title news__title_size_small">
             No se encontró nada
           </h3>

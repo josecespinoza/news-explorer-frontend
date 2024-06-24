@@ -41,11 +41,11 @@ function ModalWithMessage({ message, onClose }) {
         }`}
         ref={modalRef}
         tabIndex="1"
-        onKeyUp={toogleModal}
+        onKeyDown={toogleModal}
         onAnimationEnd={handleAnimationEnd}
       >
         <div className="modal__backdrop" onClick={toogleModal}></div>
-        <div className="modal__close"></div>
+        <div className="modal__close" onClick={toogleModal}></div>
         <section className="modal__content">
           <section className="modal-message">
             <h3 className="modal-message__message">{message}</h3>

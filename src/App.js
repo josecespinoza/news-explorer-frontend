@@ -13,8 +13,11 @@ import UserContext from "./contexts/UserContext";
 import api from "./utils/api";
 import { Route } from "react-router-dom";
 import { Switch, useHistory, useLocation } from "react-router-dom";
+import ModalWithMessage from "./components/ModalWithMessage/ModalWithMessage";
 
 function App() {
+  const APP_NEWS_PAGE_SIZE = process.env.REACT_APP_NEWS_PAGE_SIZE || 3;
+
   const [articles, setArticles] = useState([]);
   const [savedArticles, setSavedArticles] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -26,6 +29,8 @@ function App() {
   const [isSigninOpen, setIsSignInOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const [modalMessage, setModalMessage] = useState("");
+  const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
 
   const location = useLocation();
   const history = useHistory();
@@ -44,7 +49,6 @@ function App() {
       .catch((err) => {
         setIsLoggedIn(false);
         setUserInfo(null);
-        console.error("Couldn't get user info");
       });
   }, []);
 
@@ -55,9 +59,7 @@ function App() {
     try {
       const result = await newsApi.getNews(searchTerm);
       setCurrentPage(1);
-      setTotalPages(
-        Math.ceil(result.totalResults / process.env.REACT_APP_NEWS_PAGE_SIZE)
-      );
+      setTotalPages(Math.ceil(result.totalResults / APP_NEWS_PAGE_SIZE));
       setIsSearching(false);
       const normalizedArticles =
         result.articles.length <= 0
@@ -75,7 +77,8 @@ function App() {
             });
       result.articles && setArticles(normalizedArticles);
     } catch (err) {
-      console.error(err);
+      setModalMessage(err.message);
+      setIsMessageModalOpen(true);
     }
   }
 
@@ -102,7 +105,8 @@ function App() {
       setIsSearchingMore(false);
       setArticles((prevArticles) => [...prevArticles, ...normalizedArticles]);
     } catch (err) {
-      console.log(err);
+      setModalMessage(err.message);
+      setIsMessageModalOpen(true);
     }
   }
 
@@ -130,7 +134,9 @@ function App() {
       const userInfo = await api.getUserInfo();
       setUserInfo(userInfo);
     } catch (err) {
-      console.log(err);
+      setModalMessage(err.message);
+      setIsMessageModalOpen(true);
+      setIsLoggedIn(false);
     }
   }
 
@@ -153,8 +159,18 @@ function App() {
         );
       });
     } catch (err) {
-      console.log(err);
+      setModalMessage(err.message);
+      setIsMessageModalOpen(true);
     }
+  }
+
+  async function handleMessageModalClose() {
+    setIsMessageModalOpen(false);
+  }
+
+  async function handleMainError(errorMessage) {
+    setModalMessage(errorMessage);
+    setIsMessageModalOpen(true);
   }
 
   return (
@@ -180,6 +196,7 @@ function App() {
                   isSearchingMore={isSearchingMore}
                   onClickViewMore={handleViewMore}
                   isLastPage={totalPages === currentPage}
+                  onError={handleMainError}
                 ></Main>
                 <About></About>
               </>
@@ -197,6 +214,12 @@ function App() {
               onClose={handleSignClose}
               onSignIn={handleSignIn}
             ></SignInModalForm>
+          )}
+          {isMessageModalOpen && (
+            <ModalWithMessage
+              message={modalMessage}
+              onClose={handleMessageModalClose}
+            ></ModalWithMessage>
           )}
         </UserContext.Provider>
       </AuthContext.Provider>
