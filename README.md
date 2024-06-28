@@ -36,4 +36,4 @@ NOTE: You can setup env files using a `.env` file on the root of the project.
 
 ### Live Site
 
-- You can visit the application at "TBD".
+- You can visit the application at "https://find.utdnews.com".
