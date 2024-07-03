@@ -1,0 +1,15 @@
+.modal__close-container {
+  margin-left: 6px;
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+@media screen and (max-width: 550px) {
+  .modal__close-container {
+    display: flex;
+    margin: 16px 0px;
+    margin-right: 16px;
+    width: 24px;
+    height: 24px;
+  }
+}

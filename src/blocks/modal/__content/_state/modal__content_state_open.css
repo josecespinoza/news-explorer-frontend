@@ -1,0 +1,14 @@
+@keyframes SlideUp {
+  from {
+    translate: 0 25%;
+  }
+  to {
+    translate: 0 0%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .modal__content_state_open {
+    animation: SlideUp 0.3s forwards;
+  }
+}

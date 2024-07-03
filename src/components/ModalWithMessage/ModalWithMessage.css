@@ -1,0 +1,20 @@
+.modal-message {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 3;
+  width: 358px;
+}
+
+.modal-message__message {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.17;
+  font-family: "Roboto";
+  text-align: start;
+  width: 312px;
+}

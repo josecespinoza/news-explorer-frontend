@@ -1,0 +1,14 @@
+@keyframes SlideDown {
+  from {
+    translate: 0 0%;
+  }
+  to {
+    translate: 0 25%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .modal__content_state_close {
+    animation: SlideDown 0.3s forwards;
+  }
+}

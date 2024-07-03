@@ -1,0 +1,23 @@
+.modal__content {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 4;
+  grid-area: content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 34px 36px 28px;
+}
+
+@media screen and (max-width: 550px) {
+  .modal__content {
+    padding: 16px 17px;
+    align-items: flex-start;
+    justify-content: start;
+    border-radius: 16px 16px 0px 0px;
+  }
+}
