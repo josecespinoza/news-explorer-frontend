@@ -1,4 +1,5 @@
 const APP_API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+const APP_NEWS_PAGE_SIZE = process.env.REACT_APP_NEWS_PAGE_SIZE || 3;
 
 const api = {
   signup: async (email, password, username) => {
@@ -145,6 +146,28 @@ const api = {
         new Error(
           "Disculpanos, en estos momentos no podemos obtener tu información"
         )
+      );
+    }
+  },
+  getNews: async (searchTerm, page = 1) => {
+    try {
+      const response = await fetch(
+        `${APP_API_URL}/news?searchTerm=${searchTerm}&pageSize=${APP_NEWS_PAGE_SIZE}&page=${page}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`Ocurrió un error y no pudimos obtener las noticias`);
+      }
+      return await response.json();
+    } catch (err) {
+      return Promise.reject(
+        new Error("Ocurrió un error y no pudimos obtener las noticias")
       );
     }
   },
