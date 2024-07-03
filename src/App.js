@@ -3,7 +3,6 @@ import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 import About from "./components/About/About";
-import newsApi from "./utils/newsApi";
 import { useEffect, useState } from "react";
 import SignInModalForm from "./components/SignInModalForm/SignInModalForm";
 import SavedNews from "./components/SavedNews/SavedNews";
@@ -14,6 +13,7 @@ import api from "./utils/api";
 import { Route } from "react-router-dom";
 import { Switch, useHistory, useLocation } from "react-router-dom";
 import ModalWithMessage from "./components/ModalWithMessage/ModalWithMessage";
+import newsApi from "./utils/newsApi";
 
 function App() {
   const APP_NEWS_PAGE_SIZE = process.env.REACT_APP_NEWS_PAGE_SIZE || 3;
@@ -34,8 +34,10 @@ function App() {
 
   const location = useLocation();
   const history = useHistory();
+  const isProduction = process.env.NODE_ENV === "production";
 
   useEffect(() => {
+    console.log("isProduction", isProduction);
     api
       .getUserInfo()
       .then((info) => {
@@ -57,7 +59,9 @@ function App() {
     setIsNewsListShown(true);
     setIsSearching(true);
     try {
-      const result = await newsApi.getNews(searchTerm);
+      const result = isProduction
+        ? await api.getNews(searchTerm)
+        : await newsApi.getNews(searchTerm);
       setCurrentPage(1);
       setTotalPages(Math.ceil(result.totalResults / APP_NEWS_PAGE_SIZE));
       setIsSearching(false);
@@ -87,7 +91,9 @@ function App() {
     setCurrentPage(nextPage);
     setIsSearchingMore(true);
     try {
-      const result = await newsApi.getNews(currentSearchTerm, nextPage);
+      const result = isProduction
+        ? await api.getNews(currentSearchTerm, nextPage)
+        : await newsApi.getNews(currentSearchTerm, nextPage);
       const normalizedArticles =
         result.articles.length <= 0
           ? []
